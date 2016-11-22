@@ -1,5 +1,8 @@
 # Static and media content
-static/*
+static/*ç
+!static/css/
+!static/js/
+
 media/*
 
 # Byte-compiled / optimized / DLL files
