@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from terapeutas import views
 
+app_name = 'terapeutas'
 urlpatterns = [
-    url(r'^$', views.index2, name='index'),
+    url(r'^$', views.index, name='index'),
 ]
