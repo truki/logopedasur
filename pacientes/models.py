@@ -9,6 +9,7 @@ class Paciente(models.Model):
     apellidos = models.CharField(max_length=256, blank=True)
     dni = models.CharField(max_length=9, unique=True)
     direccion = models.CharField(max_length=256, blank=True)
+    imagen = models.ImageField(upload_to='pacientes', blank=True)
 
     def __str__(self):
         return self.nombre + " " + self.apellidos
