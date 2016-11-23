@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
@@ -11,6 +12,7 @@ from main.forms import UsuarioForm, PerfilTerapeutaForm
 # Vista que renderiza el home de nuestro portal
 # en caso de que el usuario no haya iniciado sesión se redirección a la
 # al formulario de login
+@login_required
 def index(request):
     return render(request, 'index.html', {})
 
