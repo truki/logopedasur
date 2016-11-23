@@ -12,7 +12,7 @@ class Terapeuta (models.Model):
     nombre = models.CharField(max_length=128, blank=False)
     apellidos = models.CharField(max_length=256, blank=False)
     dni = models.CharField(max_length=9, unique=True)
-    direccion = models.CharField(max_length=256, blank=False)
+    direccion = models.CharField(max_length=256, blank=True)
     cod_postal = models.DecimalField(max_digits=5, decimal_places=0)
     localidad = models.CharField(max_length=128, blank=True)
     provincia = models.CharField(max_length=128, blank=True)
