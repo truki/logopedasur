@@ -1,3 +1,6 @@
+from django.contrib.auth import authenticate, login
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django import forms
 from main.forms import UsuarioForm, PerfilTerapeutaForm
@@ -5,10 +8,14 @@ from main.forms import UsuarioForm, PerfilTerapeutaForm
 # Create your views here.
 
 
+# Vista que renderiza el home de nuestro portal
+# en caso de que el usuario no haya iniciado sesión se redirección a la
+# al formulario de login
 def index(request):
     return render(request, 'index.html', {})
 
 
+# Vista relacionada con el registro de un usuario
 def registrarUsuario(request):
 
     registered = False
@@ -36,3 +43,25 @@ def registrarUsuario(request):
                   {'usuario_form': usuario_form,
                    'perfil_terapeuta_form': perfil_terapeuta_form,
                    'registered': registered})
+
+
+# Vista para renderizar la web/formulario de login
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        # Si tenemos un objeto user los detalles son correcrtos
+        if user:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                return HttpResponse("La cuenta está deshabilitada")
+        else:
+            print("Login inválido: {0}, {1}".format(username, password))
+            return HttpResponse("Incio de sesión no válido.")
+    else:
+        return render(request, 'login.html', {})

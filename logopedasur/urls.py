@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^$', views.index, name="index"),
     url(r'^admin/', admin.site.urls),
     url(r'^signup/$', views.registrarUsuario, name='registrarUsuario'),
+    url(r'^login/$', views.login, name='login'),
     url(r'^pacientes/', include('pacientes.urls')),
     url(r'^terapeutas/', include('terapeutas.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

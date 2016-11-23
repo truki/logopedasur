@@ -4595,8 +4595,22 @@ body.mini-navbar.fixed-sidebar .logo-element {
   letter-spacing: -10px;
   margin-bottom: 0;
 }
+
+.logo-name2 {
+  color: #e6e6e6;
+  font-size: 180px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 0;
+}
+
 .middle-box h1 {
   font-size: 170px;
+}
+
+/* Se duplica y modifica .middle-box h1 por .middle-box2 h1 */
+.middle-box2 h1 {
+  font-size: 48px;
 }
 .wrapper .middle-box {
   margin-top: 140px;
