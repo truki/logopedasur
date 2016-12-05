@@ -3,5 +3,5 @@ from terapeutas import views
 
 app_name = 'terapeutas'
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.index, name='terapeutas_index'),
 ]

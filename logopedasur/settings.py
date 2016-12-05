@@ -57,7 +57,7 @@ ROOT_URLCONF = 'logopedasur.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR,],
+        'DIRS': [TEMPLATE_DIR, os.path.join(BASE_DIR, 'terapeutas', 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
