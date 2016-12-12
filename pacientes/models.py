@@ -6,6 +6,9 @@ from terapeutas.models import Terapeuta
 
 
 class Paciente(models.Model):
+    '''
+        Tabla Pacientes
+    '''
 
     nombre = models.CharField(max_length=128, blank=False)
     apellidos = models.CharField(max_length=256, blank=True)
@@ -18,6 +21,9 @@ class Paciente(models.Model):
 
 
 class Sesion(models.Model):
+    '''
+        Tabla sesiones
+    '''
 
     paciente = models.ForeignKey(Paciente)
     terapeutas = models.ManyToManyField(Terapeuta)
