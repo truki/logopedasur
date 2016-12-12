@@ -1,5 +1,7 @@
 from django.db import models
 
+from terapeutas.models import Terapeuta
+
 # Create your models here.
 
 
@@ -13,3 +15,17 @@ class Paciente(models.Model):
 
     def __str__(self):
         return self.nombre + " " + self.apellidos
+
+
+class Sesion(models.Model):
+
+    paciente = models.ForeignKey(Paciente)
+    terapeutas = models.ManyToManyField(Terapeuta)
+    fecha = models.DateField()
+    hora_ini = models.TimeField(auto_now=False, auto_now_add=False, null=True)
+    hora_fin = models.TimeField(auto_now=False, auto_now_add=False, null=True)
+    info = models.TextField()
+    doc = models.FileField(upload_to='uploads/%Y/%m/%d/')
+
+    def __str__(self):
+        return self.paciente.nombre + " " + self.paciente.apellidos + " " + self.fecha.strftime('%d/%m/%Y')
