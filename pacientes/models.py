@@ -25,7 +25,7 @@ class Sesion(models.Model):
         Tabla sesiones
     '''
 
-    paciente = models.ForeignKey(Paciente)
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     terapeutas = models.ManyToManyField(Terapeuta)
     fecha = models.DateField()
     hora_ini = models.TimeField(auto_now=False, auto_now_add=False, null=True)
@@ -34,4 +34,5 @@ class Sesion(models.Model):
     doc = models.FileField(upload_to='uploads/%Y/%m/%d/')
 
     def __str__(self):
-        return self.paciente.nombre + " " + self.paciente.apellidos + " " + self.fecha.strftime('%d/%m/%Y')
+        return self.paciente.nombre + " " + self.paciente.apellidos + " "
+        + self.fecha.strftime('%d/%m/%Y')

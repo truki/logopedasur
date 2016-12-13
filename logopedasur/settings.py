@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main',
     'pacientes',
     'terapeutas',
+    'horario',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +58,10 @@ ROOT_URLCONF = 'logopedasur.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR, os.path.join(BASE_DIR, 'terapeutas', 'templates'), ],
+        'DIRS': [TEMPLATE_DIR,
+                 os.path.join(BASE_DIR, 'terapeutas', 'templates'),
+                 os.path.join(BASE_DIR, 'pacientes', 'templates'),
+                 os.path.join(BASE_DIR, 'horario', 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

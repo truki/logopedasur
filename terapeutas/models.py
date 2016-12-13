@@ -1,8 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from pacientes.models import Paciente
-
 
 # Create your models here.
 
@@ -26,16 +24,3 @@ class Terapeuta (models.Model):
 
     def __str__(self):
         return self.nombre + " " + self.apellidos
-
-class Horario(models.Model):
-    '''
-        Tabla Horario
-        Donde se generaran todas y cada una de las sesiones
-        individuales realizadas
-    '''
-
-    terapeutas = models.ManyToManyField(Terapeuta)
-    paciente = models.ForeignKey(Paciente)
-    fecha = models.DateField()
-    hora_ini = models.TimeField(auto_now=False, auto_now_add=False, null=False)
-    hora_fin = models.TimeField(auto_now=False, auto_now_add=False, null=False)

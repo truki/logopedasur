@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^login/$', views.login, name='login'),
     url(r'^pacientes/', include('pacientes.urls')),
     url(r'^terapeutas/', include('terapeutas.urls')),
+    url(r'^horario/', include('horario.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
