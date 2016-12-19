@@ -31,6 +31,7 @@ class ReglasHorario (models.Model):
         que en algun momento en el tiempo seran volcadas en sesiones reales en
         la tabla horario
     '''
+    
     terapeutas = models.ManyToManyField(Terapeuta)
     paciente = models.ForeignKey('pacientes.Paciente',
                                  on_delete=models.CASCADE)
