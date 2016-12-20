@@ -5,9 +5,10 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
 
-
 # Create your views here.
 
-
 def index(request):
+    '''
+        Vista para mostrar el listado de terapeutas
+    '''
     return render(request, 'terapeutas_index.html', {})
