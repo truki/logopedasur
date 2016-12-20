@@ -172,8 +172,11 @@
                 <a href="profile.html">
 
                     <img alt="image" class="img-circle" src="img/a2.jpg">
+                      123
 
-
+                        {% for terapeuta in terapeutas %}
+                          {{ terapeuta.nombre }}
+                        {% endfor %}
                     <h3 class="m-b-xs"><strong>John Smith</strong></h3>
 
                     <div class="font-bold">Graphics designer</div>

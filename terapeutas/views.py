@@ -4,6 +4,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
+from .models import Terapeuta
+
 
 # Create your views here.
 
@@ -11,4 +13,5 @@ def index(request):
     '''
         Vista para mostrar el listado de terapeutas
     '''
-    return render(request, 'terapeutas_index.html', {})
+    terapeutas = Terapeuta.objects.all()
+    return render(request, 'terapeutas_index.html', {"terapeutas": terapeutas})
