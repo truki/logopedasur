@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 from terapeutas.models import Terapeuta
 
@@ -18,6 +19,10 @@ class Paciente(models.Model):
 
     def __str__(self):
         return self.nombre + " " + self.apellidos
+
+    def get_absolute_url(self):
+        url_name = paciente_detail
+        return reverse(url_name, kwargs={"pk": self.id})
 
 
 class Sesion(models.Model):
