@@ -6,6 +6,11 @@ from terapeutas.models import Terapeuta
 # Create your models here.
 
 
+class PacienteManager(models.Manager):
+    def get_Leo(self):
+        return super(PacienteManager, self).filter(nombre="Leo")
+
+
 class Paciente(models.Model):
     '''
         Tabla Pacientes
@@ -16,6 +21,9 @@ class Paciente(models.Model):
     dni = models.CharField(max_length=9, unique=True)
     direccion = models.CharField(max_length=256, blank=True)
     imagen = models.ImageField(upload_to='pacientes', blank=True)
+
+    objects = models.Manager()  # Default model manager
+    manager = PacienteManager()  # Paciente model manager
 
     def __str__(self):
         return self.nombre + " " + self.apellidos
@@ -41,3 +49,7 @@ class Sesion(models.Model):
     def __str__(self):
         return self.paciente.nombre + " " + self.paciente.apellidos + " "
         + self.fecha.strftime('%d/%m/%Y')
+
+    def get_absolute_url(self):
+        url_name = sesion_detail
+        return reverse(url_name, kwargs={"pk": self.id})
