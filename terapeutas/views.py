@@ -15,3 +15,9 @@ def index(request):
     '''
     terapeutas = Terapeuta.objects.all()
     return render(request, 'terapeutas_index.html', {"terapeutas": terapeutas})
+
+
+# View for a new terapeutas
+
+def new(request):
+    pass
