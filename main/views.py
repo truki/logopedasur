@@ -47,14 +47,16 @@ def registrarUsuario(request):
                    'registered': registered})
 
 
-# Vista para renderizar la web/formulario de login
-def login(request):
+# Vista para renderizar el formulario de login
+
+def login_view(request):
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         user = authenticate(username=username, password=password)
-
+        print(username, password)
         # Si tenemos un objeto user los detalles son correcrtos
         if user:
             if user.is_active:

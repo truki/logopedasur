@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^$', views.index, name="index"),
     url(r'^admin/', admin.site.urls),
     url(r'^signup/$', views.registrarUsuario, name='registrarUsuario'),
-    url(r'^login/$', views.login, name='login'),
+    url(r'^login/$', views.login_view, name='login_url'),
     url(r'^pacientes/', include('pacientes.urls')),
     url(r'^terapeutas/', include('terapeutas.urls')),
     url(r'^horario/', include('horario.urls'))
