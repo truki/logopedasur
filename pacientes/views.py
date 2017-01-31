@@ -1,10 +1,17 @@
 from django.shortcuts import render
 
+from .models import Paciente, Tutor, Sesion
+
 # Create your views here.
 
 
 def index(request):
-    pass
+    '''
+        Vista que muestra todos los pacientes
+    '''
+    pacientes = Paciente.objects.all()
+    context = {"pacientes": pacientes}
+    return render(request, "pacientes_index.html", context)
 
 
 # View that show the patient detail, patient is retrieved by primary key
