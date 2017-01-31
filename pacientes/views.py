@@ -3,6 +3,7 @@ from django.shortcuts import render
 
 
 from .models import Paciente, Tutor, Sesion
+from .forms import PacienteForm
 
 # Create your views here.
 
@@ -16,9 +17,17 @@ def index(request):
     return render(request, "pacientes_index.html", context)
 
 # View that add a patient into the system
-def pacinte_add(request):
-    pass
+def pacientes_add(request):
+    form = PacienteForm(request.POST or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return HttpResponseRedirect(reverse('index'))
 
+    context = {
+        "form": form
+    }
+    return render(request, 'pacientes_add.html', context)
 
 # View that show the patient detail, patient is retrieved by primary key
 @login_required
