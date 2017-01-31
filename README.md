@@ -19,4 +19,4 @@ Django web app to manage a speech therapy clinic.
 
 ## License
 
-This software is...
+This software is... test
