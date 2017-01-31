@@ -15,6 +15,10 @@ def index(request):
     context = {"pacientes": pacientes}
     return render(request, "pacientes_index.html", context)
 
+# View that add a patient into the system
+def pacinte_add(request):
+    pass
+
 
 # View that show the patient detail, patient is retrieved by primary key
 @login_required
