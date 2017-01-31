@@ -18,3 +18,5 @@ Django web app to manage a speech therapy clinic.
 * Pillow 3.4.2
 
 ## License
+
+This software is...
