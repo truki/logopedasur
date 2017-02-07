@@ -14,7 +14,7 @@ def index(request):
     '''
         Vista para mostrar el listado de terapeutas
     '''
-    terapeutas = Terapeuta.objects.all()
+    terapeutas = Terapeuta.objects.all().order_by('apellidos','nombre')
     paginator = Paginator(terapeutas, 8) # show 8 therapeutas
 
     page = request.GET.get('page')

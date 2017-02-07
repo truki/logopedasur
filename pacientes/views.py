@@ -13,7 +13,7 @@ def index(request):
     '''
         Vista que muestra todos los pacientes
     '''
-    pacientes = Paciente.objects.all()
+    pacientes = Paciente.objects.all().order_by('apellidos','nombre')
     paginator = Paginator(pacientes, 8) # show 8 therapeutas
 
     page = request.GET.get('page')
