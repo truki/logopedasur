@@ -166,6 +166,28 @@
 {% block content_block %}
   <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
+      <div class="pagination">
+          <ul class="pagination pull-right">
+            {% if terapeutas.has_previous %}
+              <li class="footable-page-arrow">
+                <a data-page="prev" href="?page={{ terapeutas.previous_page_number }}">‹</a>
+              </li>
+            {% endif %}
+
+            <li class="footable-page active">
+              <a data-page="1" href="#">{{ terapeutas.number }}</a>
+            </li>
+
+            {% if terapeutas.has_next %}
+              <li class="footable-page-arrow">
+                <a data-page="next" href="?page={{ terapeutas.next_page_number }}">›</a>
+              </li>
+            {% endif %}
+
+          </ul>
+      </div>
+    </div>
+    <div class="row">
       {% for terapeuta in terapeutas %}
         <div class="col-lg-3">
             <div class="contact-box center-version">
@@ -195,23 +217,6 @@
             </div>
         </div>
       {% endfor %}
-      <div class="pagination">
-        <span class="step-links">
-            {% if terapeutas.has_previous %}
-                <a href="?page={{ terapeutas.previous_page_number }}">previous</a>
-            {% endif %}
-
-            <span class="current">
-                Page {{ terapeutas.number }} of {{ terapeutas.paginator.num_pages }}.
-            </span>
-
-            {% if terapeutas.has_next %}
-                <a href="?page={{ terapeutas.next_page_number }}">next</a>
-            {% endif %}
-        </span>
-      </div>
-
-
     </div>
   </div>
 {% endblock %}
