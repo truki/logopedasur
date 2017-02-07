@@ -195,6 +195,21 @@
             </div>
         </div>
       {% endfor %}
+      <div class="pagination">
+        <span class="step-links">
+            {% if pacientes.has_previous %}
+                <a href="?page={{ pacientes.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ pacientes.number }} of {{ pacientes.paginator.num_pages }}.
+            </span>
+
+            {% if pacientes.has_next %}
+                <a href="?page={{ pacientes.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+      </div>
 
 
 

@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
 
@@ -13,6 +14,18 @@ def index(request):
         Vista que muestra todos los pacientes
     '''
     pacientes = Paciente.objects.all()
+    paginator = Paginator(pacientes, 8) # show 8 therapeutas
+
+    page = request.GET.get('page')
+    try:
+        pacientes = paginator.page(page)
+    except PageNotAnInteger:
+        # si pagina no es un entero posicionamos en la primera
+        pacientes = paginator.page(1)
+    except:
+        # si la pagina está fuera de rango por arriba, nos
+        # posicionamos en la última
+        pacientes = paginator.page(paginator.num_pages)
     context = {"pacientes": pacientes}
     return render(request, "pacientes_index.html", context)
 
