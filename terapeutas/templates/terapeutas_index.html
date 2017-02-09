@@ -195,35 +195,24 @@
             </div>
         </div>
       {% endfor %}
-      <br>
-      <br>
-      <div class="btn-group">
 
-          <button type="button" class="btn btn-white" disabled="disabled"><i class="fa fa-chevron-left"></i></button>
-        {% endif %}
 
-        <button class="btn btn-white  active"><a href="#">{{ terapeutas.number }}</a></button>
-        {% if terapeutas.has_next %}
-          <button type="button" class="btn btn-white"><a href="?page={{ terapeutas.next_page_number }}"><i class="fa fa-chevron-right"></i></a></button>
-        {% else %}
-          <button type="button" class="btn btn-white" disabled="disabled"><i class="fa fa-chevron-right"></i></button>
-        {% endif %}
-      </div>
-      <div class="text-center">
-          <ul class="pagination">
-            {% if terapeutas.has_previous %}
-              <li class="disabled"><a href=""?page={{ terapeutas.previous_page_number }}">&laquo;</a></li>
-            {% else %}
 
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
-          </ul>
-      </div>
-
+    </div>
+    <div class="text-center">
+        <ul class="pagination">
+          {% if terapeutas.has_previous %}
+            <li><a href="?page={{ terapeutas.previous_page_number }}">&laquo;</a></li>
+          {% else %}
+            <li class="disable"><a href="#">&laquo;</a></li>
+          {% endif %}
+            <li class="active"><a href="#">{{ terapeutas.number }}</a></li>
+          {% if terapeutas.has_next %}
+            <li><a href="?page={{ terapeutas.next_page_number }}">&raquo;</a></li>
+          {% else %}
+            <li class="disable"><a href="#">&raquo;</a></li>
+          {% endif %}
+        </ul>
     </div>
   </div>
 {% endblock %}
