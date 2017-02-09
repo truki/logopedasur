@@ -166,28 +166,6 @@
 {% block content_block %}
   <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-      <div class="pagination">
-          <ul class="pagination pull-right">
-            {% if terapeutas.has_previous %}
-              <li class="footable-page-arrow">
-                <a data-page="prev" href="?page={{ terapeutas.previous_page_number }}">‹</a>
-              </li>
-            {% endif %}
-
-            <li class="footable-page active">
-              <a data-page="1" href="#">{{ terapeutas.number }}</a>
-            </li>
-
-            {% if terapeutas.has_next %}
-              <li class="footable-page-arrow">
-                <a data-page="next" href="?page={{ terapeutas.next_page_number }}">›</a>
-              </li>
-            {% endif %}
-
-          </ul>
-      </div>
-    </div>
-    <div class="row">
       {% for terapeuta in terapeutas %}
         <div class="col-lg-3">
             <div class="contact-box center-version">
@@ -217,6 +195,35 @@
             </div>
         </div>
       {% endfor %}
+      <br>
+      <br>
+      <div class="btn-group">
+
+          <button type="button" class="btn btn-white" disabled="disabled"><i class="fa fa-chevron-left"></i></button>
+        {% endif %}
+
+        <button class="btn btn-white  active"><a href="#">{{ terapeutas.number }}</a></button>
+        {% if terapeutas.has_next %}
+          <button type="button" class="btn btn-white"><a href="?page={{ terapeutas.next_page_number }}"><i class="fa fa-chevron-right"></i></a></button>
+        {% else %}
+          <button type="button" class="btn btn-white" disabled="disabled"><i class="fa fa-chevron-right"></i></button>
+        {% endif %}
+      </div>
+      <div class="text-center">
+          <ul class="pagination">
+            {% if terapeutas.has_previous %}
+              <li class="disabled"><a href=""?page={{ terapeutas.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+          </ul>
+      </div>
+
     </div>
   </div>
 {% endblock %}

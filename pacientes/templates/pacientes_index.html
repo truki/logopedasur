@@ -166,6 +166,31 @@
 {% block content_block %}
   <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
+      <div class="btn-group">
+        <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i></button>
+        <button class="btn btn-white">1</button>
+        <button class="btn btn-white  active">2</button>
+        <button class="btn btn-white">3</button>
+        <button class="btn btn-white">4</button>
+        <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i> </button>
+      </div>
+      <div class="pagination">
+        <span class="step-links">
+            {% if pacientes.has_previous %}
+                <a href="?page={{ pacientes.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ pacientes.number }} of {{ pacientes.paginator.num_pages }}.
+            </span>
+
+            {% if pacientes.has_next %}
+                <a href="?page={{ pacientes.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+      </div>
+
+
       {% for paciente in pacientes %}
         <div class="col-lg-3">
             <div class="contact-box center-version">
@@ -195,25 +220,6 @@
             </div>
         </div>
       {% endfor %}
-      <div class="pagination">
-        <span class="step-links">
-            {% if pacientes.has_previous %}
-                <a href="?page={{ pacientes.previous_page_number }}">previous</a>
-            {% endif %}
-
-            <span class="current">
-                Page {{ pacientes.number }} of {{ pacientes.paginator.num_pages }}.
-            </span>
-
-            {% if pacientes.has_next %}
-                <a href="?page={{ pacientes.next_page_number }}">next</a>
-            {% endif %}
-        </span>
-      </div>
-
-
-
-
     </div>
   </div>
 {% endblock %}
