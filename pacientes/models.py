@@ -14,6 +14,8 @@ class Tutor(models.Model):
     apellidos = models.CharField(max_length=256, blank=True)
     dni = models.CharField(max_length=9, unique=True)
     direccion = models.CharField(max_length=256, blank=True)
+    email = models.EmailField(max_length=256, blank=True)
+    telefono = models.CharField(max_length=12, blank=True)
 
     def __str__(self):
         return self.nombre + " " + self.apellidos
@@ -38,7 +40,7 @@ class Paciente(models.Model):
     direccion = models.CharField(max_length=256, blank=True)
     imagen = models.ImageField(upload_to='pacientes', null=True, blank=True)
     telefono = models.CharField(max_length=12, blank=True)
-    email = models.EmailField(max_length=256)
+    email = models.EmailField(max_length=256, blank=True)
     tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE)
 
     objects = models.Manager()  # Default model manager

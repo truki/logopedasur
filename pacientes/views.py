@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 
 from .models import Paciente, Tutor, Sesion
-from .forms import PacienteForm
+from .forms import PacienteForm, TutorForm
 
 # Create your views here.
 
@@ -33,6 +33,7 @@ def index(request):
     return render(request, "pacientes_index.html", context)
 
 
+@login_required
 def pacientes_add(request):
     '''
     View that add a patient into the system
@@ -61,3 +62,20 @@ def paciente_detail(request, pk):
 @login_required
 def sesion_detail(request, pk):
     pass
+
+
+@login_required
+def tutor_add(request):
+    '''
+    View that add a tutor into the system
+    '''
+    form = TutorForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
+
+    context = {
+        "form": form
+    }
+    return render(request, 'tutor_add.html', context)
