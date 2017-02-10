@@ -36,7 +36,7 @@ class Paciente(models.Model):
     apellidos = models.CharField(max_length=256, blank=True)
     dni = models.CharField(max_length=9, unique=True)
     direccion = models.CharField(max_length=256, blank=True)
-    imagen = models.ImageField(upload_to='pacientes', blank=True)
+    imagen = models.ImageField(upload_to='pacientes', null=True, blank=True)
     telefono = models.CharField(max_length=12, blank=True)
     tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE)
 

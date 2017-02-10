@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 
@@ -8,13 +10,14 @@ from .forms import PacienteForm
 
 # Create your views here.
 
+
 @login_required
 def index(request):
     '''
         Vista que muestra todos los pacientes
     '''
-    pacientes = Paciente.objects.all().order_by('apellidos','nombre')
-    paginator = Paginator(pacientes, 8) # show 8 therapeutas
+    pacientes = Paciente.objects.all().order_by('apellidos', 'nombre')
+    paginator = Paginator(pacientes, 8)  # show 8 therapeutas
 
     page = request.GET.get('page')
     try:
@@ -29,22 +32,28 @@ def index(request):
     context = {"pacientes": pacientes}
     return render(request, "pacientes_index.html", context)
 
-# View that add a patient into the system
+
 def pacientes_add(request):
-    form = PacienteForm(request.POST or None)
+    '''
+    View that add a patient into the system
+    '''
+    form = PacienteForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        return HttpResponseRedirect(reverse('index'))
+        return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
 
     context = {
         "form": form
     }
     return render(request, 'pacientes_add.html', context)
 
-# View that show the patient detail, patient is retrieved by primary key
+
 @login_required
 def paciente_detail(request, pk):
+    '''
+    View that show the patient detail, patient is retrieved by primary key
+    '''
     pass
 
 
