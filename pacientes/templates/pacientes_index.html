@@ -204,7 +204,7 @@
             <li class="disable"><a href="#">&laquo;</a></li>
           {% endif %}
             <li class="active"><a href="#">{{ pacientes.number }}</a></li>
-          {% if terapeutas.has_next %}
+          {% if pacientes.has_next %}
             <li><a href="?page={{ pacientes.next_page_number }}">&raquo;</a></li>
           {% else %}
             <li class="disable"><a href="#">&raquo;</a></li>
