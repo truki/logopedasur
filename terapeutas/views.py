@@ -6,10 +6,12 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
 from .models import Terapeuta
+from .forms import TerapeutaForm
 
 
 # Create your views here.
 
+@login_required
 def index(request):
     '''
         Vista para mostrar el listado de terapeutas
@@ -33,5 +35,19 @@ def index(request):
 
 # View for a new terapeutas
 
-def new(request):
-    pass
+@login_required
+def terapeutas_add(request):
+    '''
+    View that add a terapeuta into the system
+    '''
+
+    form = TerapeutaForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return HttpResponseRedirect(reverse('terapeutas:terapeutas_index'))
+
+    context = {
+        "form": form
+    }
+    return render(request, 'terapeutas_add.html', context)

@@ -20,6 +20,7 @@ class Terapeuta (models.Model):
     localidad = models.CharField(max_length=128, blank=True)
     provincia = models.CharField(max_length=128, blank=True)
     seg_social = models.CharField(max_length=12, blank=True, default="")
+    telefono = models.CharField(max_length=12, blank=True)
     imagen = models.ImageField(upload_to='terapeutas', blank=True)
 
     def __str__(self):
