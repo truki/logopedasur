@@ -20,4 +20,5 @@ class TerapeutaForm(forms.ModelForm):
             'localidad': forms.TextInput(attrs={'class': 'form-control'}),
             'provincia': forms.TextInput(attrs={'class': 'form-control'}),
             'seg_social': forms.TextInput(attrs={'class': 'form-control'}),
+            'titulaciones': forms.SelectMultiple(attrs={'class': 'form-control'}),
         }

@@ -33,7 +33,7 @@ def index(request):
     return render(request, 'terapeutas_index.html', {"terapeutas": terapeutas})
 
 
-# View for a new terapeutas
+# View for add new terapeutas
 
 @login_required
 def terapeutas_add(request):

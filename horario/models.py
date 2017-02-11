@@ -5,6 +5,27 @@ from terapeutas.models import Terapeuta
 # Create your models here.
 
 
+class DiasAux (models.Model):
+    '''
+    Auxiliar Table to storage days a week and its properties
+    '''
+
+    DIAS_CHOICES = (
+        ("L", "Lunes"),
+        ("M", "Martes"),
+        ("X", "Miércoles"),
+        ("J", "Jueves"),
+        ("V", "Viernes"),
+        ("S", "Sábados"),
+        ("D", "Domingos"),
+    )
+    dia = models.CharField(choices=DIAS_CHOICES, max_length=9)
+    laborable = models.BooleanField()
+
+    def __str__(self):
+        return self.dia
+
+
 class Horario (models.Model):
     '''
         Tabla Horario
@@ -31,22 +52,13 @@ class ReglasHorario (models.Model):
         que en algun momento en el tiempo seran volcadas en sesiones reales en
         la tabla horario
     '''
-    
+
     terapeutas = models.ManyToManyField(Terapeuta)
     paciente = models.ForeignKey('pacientes.Paciente',
                                  on_delete=models.CASCADE)
     fecha_creacion = models.DateField(auto_now_add=True)
     fecha_actualizacion = models.DateField(auto_now=True)
-    DIAS_CHOICES = (
-        ("L", "Lunes"),
-        ("M", "Martes"),
-        ("X", "Miércoles"),
-        ("J", "Jueves"),
-        ("V", "Viernes"),
-        ("S", "Sábados"),
-        ("D", "Domingos"),
-    )
-    dias = models.CharField(choices=DIAS_CHOICES, max_length=9)
+    dias = models.ManyToManyField(DiasAux)
     hora_ini = models.TimeField(auto_now=False, auto_now_add=False, null=False)
     hora_fin = models.TimeField(auto_now=False, auto_now_add=False, null=False)
 
