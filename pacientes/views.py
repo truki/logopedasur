@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 
 from .models import Paciente, Tutor, Sesion
@@ -55,7 +55,10 @@ def paciente_detail(request, pk):
     '''
     View that show the patient detail, patient is retrieved by primary key
     '''
-    pass
+    paciente = get_object_or_404(Paciente, pk=pk)
+    context = {"paciente": paciente}
+    return render(request, 'paciente_detail.html', context)
+
 
 
 # View that show the sesion detail. Sesion is retrieved by its primary key (pk)
