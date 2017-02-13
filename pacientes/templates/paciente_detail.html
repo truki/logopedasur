@@ -214,14 +214,16 @@
                                     <i class="fa fa-video-camera modal-icon"></i>
                                     <h4 class="modal-title">Nueva sesión</h4>
                                   </div>
-                                  <div class="modal-body">
-                                    
-                                    <div class="form-group"><label>Sample Input</label> <input type="email" placeholder="Enter your email" class="form-control"></div>
-                                  </div>
-                                  <div class="modal-footer">
-                                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                  </div>
+                                  <form method="POST" action="{% url 'pacientes:sesion_add' %}" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="modal-body">
+                                      {{ formSesion }}
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                      <button type="submit" class="btn btn-primary">Insertar sesión</button>
+                                    </div>
+                                  </form>
                                 </div>
                               </div>
                             </div>

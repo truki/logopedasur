@@ -35,3 +35,20 @@ class TutorForm(forms.ModelForm):
             'email': forms.TextInput(attrs={'class': 'form-control'}),
             'telefono': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+class SesionForm(forms.ModelForm):
+    '''
+    Formulario para insertar un nuevo tutor
+    '''
+    class Meta:
+        model = Sesion
+        fields = '__all__'
+        widgets = {
+            'paciente': forms.Select(attrs={'class': 'form-control'}),
+            'terapeutas': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'fecha': forms.DateInput(attrs={'class': 'form-control', 'format': '%m/%d/%Y'}),
+            'hora_ini': forms.DateTimeInput(attrs={'class': 'form-control', 'format': '%H:%M'}),
+            'hora_fin': forms.DateTimeInput(attrs={'class': 'form-control', 'format': '%H:%M'}),
+            'info': forms.Textarea(attrs={'class': 'form-control'}),
+            'doc': forms.FileInput(attrs={'class': 'form-control'}),
+        }

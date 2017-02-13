@@ -71,7 +71,7 @@ class Sesion(models.Model):
     hora_ini = models.TimeField(auto_now=False, auto_now_add=False, null=True)
     hora_fin = models.TimeField(auto_now=False, auto_now_add=False, null=True)
     info = models.TextField()
-    doc = models.FileField(upload_to='uploads/%Y/%m/%d/')
+    doc = models.FileField(upload_to='pacientes/uploads/%Y/%m/%d/', null=True, blank=True)
 
     def __str__(self):
         return self.paciente.nombre + " " + self.paciente.apellidos + " "

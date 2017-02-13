@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404
 
 
 from .models import Paciente, Tutor, Sesion
-from .forms import PacienteForm, TutorForm
+from .forms import PacienteForm, TutorForm, SesionForm
 
 # Create your views here.
 
@@ -56,7 +56,8 @@ def paciente_detail(request, pk):
     View that show the patient detail, patient is retrieved by primary key
     '''
     paciente = get_object_or_404(Paciente, pk=pk)
-    context = {"paciente": paciente}
+    formSesion = SesionForm(request.POST or None, request.FILES or None)
+    context = {"paciente": paciente, "formSesion": formSesion}
     return render(request, 'paciente_detail.html', context)
 
 
@@ -82,3 +83,20 @@ def tutor_add(request):
         "form": form
     }
     return render(request, 'tutor_add.html', context)
+
+
+@login_required
+def sesion_add(request):
+    '''
+    View that add a tutor into the system
+    '''
+    form = SesionForm(request.POST or None, request.FILES or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            print("Ok formulario valido")
+            instance = form.save(commit=False)
+            instance.save()
+            return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
+
+    print("Ok formulario NO valido")
+    return render(request, 'pacientes_index.html', {})
