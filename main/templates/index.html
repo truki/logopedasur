@@ -43,7 +43,7 @@
       </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+                <span class="m-r-sm text-muted welcome-message">Bienvenido/a {{ request.user }}</span>
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -161,7 +161,7 @@
   <div class="row  border-bottom white-bg dashboard-header">
 
                 <div class="col-md-3">
-                    <h2>Welcome Amelia</h2>
+                    <h2>Bienvenido/a {{ request.user }}</h2>
                     <small>You have 42 messages and 6 notifications.</small>
                     <ul class="list-group clear-list m-t">
                         <li class="list-group-item fist-item">

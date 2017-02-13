@@ -14,6 +14,9 @@ class Tutor(models.Model):
     apellidos = models.CharField(max_length=256, blank=True)
     dni = models.CharField(max_length=9, unique=True)
     direccion = models.CharField(max_length=256, blank=True)
+    cod_postal = models.DecimalField(max_digits=5, decimal_places=0,
+                                     blank=True, null=True)
+    localidad = models.CharField(max_length=128, blank=True, null=True)
     email = models.EmailField(max_length=256, blank=True)
     telefono = models.CharField(max_length=12, blank=True)
 
@@ -39,6 +42,9 @@ class Paciente(models.Model):
     dni = models.CharField(max_length=9, unique=True)
     direccion = models.CharField(max_length=256, blank=True)
     imagen = models.ImageField(upload_to='pacientes', null=True, blank=True)
+    cod_postal = models.DecimalField(max_digits=5, decimal_places=0,
+                                     blank=True, null=True)
+    localidad = models.CharField(max_length=128, blank=True, null=True)
     telefono = models.CharField(max_length=12, blank=True)
     email = models.EmailField(max_length=256, blank=True)
     tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE)

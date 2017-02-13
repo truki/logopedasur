@@ -36,6 +36,7 @@ class Terapeuta (models.Model):
     telefono = models.CharField(max_length=12, blank=True)
     imagen = models.ImageField(upload_to='terapeutas', blank=True)
     titulaciones = models.ManyToManyField(TitulacionAux)
-    
+
+
     def __str__(self):
         return self.nombre + " " + self.apellidos
