@@ -170,7 +170,7 @@
         <div class="col-lg-3">
             <div class="contact-box center-version">
 
-                <a href="profile.html">
+                <a href="{% url "terapeutas:terapeuta_detail" terapeuta.pk %}">
 
                     <img alt="image" class="img-circle" src="{{ terapeuta.imagen.url }}">
                     <h3 class="m-b-xs"><strong>{{ terapeuta.nombre }}</strong></h3>

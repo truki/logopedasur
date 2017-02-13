@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .models import Terapeuta
 from .forms import TerapeutaForm
@@ -51,3 +51,13 @@ def terapeutas_add(request):
         "form": form
     }
     return render(request, 'terapeutas_add.html', context)
+
+
+@login_required
+def terapeuta_detail(request, pk):
+    '''
+    View that show the terapeuta detail, terapeuta is retrieved by primary key
+    '''
+    terapeuta = get_object_or_404(Terapeuta, pk=pk)
+    context = {"terapeuta": terapeuta}
+    return render(request, 'terapeuta_detail.html', context)

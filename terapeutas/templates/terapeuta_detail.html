@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title_block %}
-  Pacientes
+  Terapeutas
 {% endblock %}
 
 {% block head_library_block %}
@@ -152,7 +152,7 @@
 {% block breadcrumbs_block %}
   <div class="row wrapper border-bottom white-bg page-heading">
       <div class="col-lg-10">
-          <h2>Pacientes / {{ paciente.nombre }} {{ paciente.apellidos }}</h2>
+          <h2>Terapeutas / {{ terapeuta.nombre }} {{ terapeuta.apellidos }}</h2>
       </div>
   </div>
 {% endblock %}
@@ -168,11 +168,11 @@
                         <div>
                             <center>
                               <div class="ibox-content no-padding border-left-right">
-                                <img alt="image" class="img-responsive" src="{{ paciente.imagen.url }}">
+                                <img alt="image" class="img-responsive" src="{{ terapeuta.imagen.url }}">
                               </div>
                             </center>
                             <div class="ibox-content profile-content">
-                                <h4><strong>Monica Smith</strong></h4>
+                                <h4><strong>{{ terapeuta.nombre }} {{ terapeuta.apellidos }}</strong></h4>
                                 <p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
                                 <h5>
                                     About me
