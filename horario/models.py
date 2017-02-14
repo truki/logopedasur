@@ -58,9 +58,9 @@ class ReglasHorario (models.Model):
                                  on_delete=models.CASCADE)
     fecha_creacion = models.DateField(auto_now_add=True)
     fecha_actualizacion = models.DateField(auto_now=True)
-    dias = models.ManyToManyField(DiasAux)
+    dia = models.ForeignKey('DiasAux', null=True, blank=True)
     hora_ini = models.TimeField(auto_now=False, auto_now_add=False, null=False)
     hora_fin = models.TimeField(auto_now=False, auto_now_add=False, null=False)
 
     def __str__(self):
-        return self.paciente.nombre + " " + self.paciente.apellidos + " " + self.fecha.strftime('%d/%m/%Y') + self.hora_ini.strftime('%H:%M') + "-" + self.hora_fin.strftime('%H:%M')
+        return self.paciente.nombre + " " + self.dia.dia + " " + self.hora_ini.strftime('%H:%M') + "-" + self.hora_fin.strftime('%H:%M')
