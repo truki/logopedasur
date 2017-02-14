@@ -214,7 +214,7 @@
                                     <i class="fa fa-video-camera modal-icon"></i>
                                     <h4 class="modal-title">Nueva sesión</h4>
                                   </div>
-                                  <form method="POST" action="{% url 'pacientes:sesion_add' %}" enctype="multipart/form-data">
+                                  <form method="POST" action="{% url 'pacientes:sesion_add' %}" enctype='multipart/form-data'>
                                     {% csrf_token %}
                                     <div class="modal-body">
                                       {{ formSesion }}

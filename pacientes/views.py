@@ -90,8 +90,10 @@ def sesion_add(request):
     '''
     View that add a tutor into the system
     '''
-    form = SesionForm(request.POST or None, request.FILES or None)
+    print("Por si no pasara.....")
     if request.method == 'POST':
+        form = SesionForm(request.POST or None, request.FILES or None)
+        print("Ok metodo==POST")
         if form.is_valid():
             print("Ok formulario valido")
             instance = form.save(commit=False)
