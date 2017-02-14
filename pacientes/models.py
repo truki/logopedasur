@@ -80,3 +80,19 @@ class Sesion(models.Model):
     def get_absolute_url(self):
         url_name = sesion_detail
         return reverse(url_name, kwargs={"pk": self.id})
+
+class Informe(models.Model):
+    '''
+        Tabla informes
+    '''
+
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    terapeutas = models.ManyToManyField(Terapeuta)
+    titulo = models.CharField(max_length=256, blank=True, null=True)
+    fecha_informe = models.DateField(blank=True, null=True)
+    fecha_modificacion = models.DateField()
+    fichero = models.FileField(upload_to='pacientes/uploads/%Y/%m/%d/', null=True, blank=True)
+
+    def __str__(self):
+        return self.paciente.nombre + " "
+        + self.fecha_informe.strftime('%d/%m/%Y') + self.titulo

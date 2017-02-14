@@ -9,4 +9,7 @@ urlpatterns = [
     url(r'sesion/^(?P<pk>\d+)/$', views.sesion_detail, name='sesion_detail'),
     url(r'sesion/add/$', views.sesion_add, name='sesion_add'),
     url(r'^tutor/add/$', views.tutor_add, name='tutor_add'),
+    url(r'informe/add/$', views.informe_add, name='informe_add'),
+
+
 ]

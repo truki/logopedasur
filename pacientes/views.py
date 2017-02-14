@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404
 
 
 from .models import Paciente, Tutor, Sesion
-from .forms import PacienteForm, TutorForm, SesionForm
+from .forms import PacienteForm, TutorForm, SesionForm, InformeForm
 
 # Create your views here.
 
@@ -59,9 +59,11 @@ def paciente_detail(request, pk):
     sesiones = Sesion.objects.filter(paciente=pk)
     print(sesiones)
     formSesion = SesionForm(request.POST or None, request.FILES or None)
+    formInforme = InformeForm(request.POST or None, request.FILES or None)
     context = {"paciente": paciente, "formSesion": formSesion,
-               "sesiones_box": "visible", "informes_box": "hidden",
-               "horario_box": "hidden", "sesiones": sesiones}
+               "formInforme": formInforme, "sesiones_box": "visible",
+               "informes_box": "hidden", "horario_box": "hidden",
+               "sesiones": sesiones}
     return render(request, 'paciente_detail.html', context)
 
 
@@ -103,3 +105,11 @@ def sesion_add(request):
 
     print("Ok formulario NO valido")
     return render(request, 'pacientes_index.html', {})
+
+
+@login_required
+def informe_add(request):
+    '''
+    View that add a tutor into the system
+    '''
+    pass

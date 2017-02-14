@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Paciente, Sesion, Tutor
+from .models import Paciente, Sesion, Tutor, Informe
 
 # Register your models here.
 
@@ -7,3 +7,4 @@ from .models import Paciente, Sesion, Tutor
 admin.site.register(Paciente)
 admin.site.register(Sesion)
 admin.site.register(Tutor)
+admin.site.register(Informe)
