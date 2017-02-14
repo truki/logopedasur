@@ -12,6 +12,9 @@
     <!-- Toastr style -->
     <link href="{% static "css/plugins/toastr/toastr.min.css" %}" rel="stylesheet">
 
+    <!-- Datapicker style -->
+    <link href="{% static "css/plugins/datapicker/datepicker3.css" %}" rel="stylesheet">
+
     <!-- Gritter -->
     <link href="{% static "js/plugins/gritter/jquery.gritter.css" %}" rel="stylesheet">
 
@@ -217,7 +220,11 @@
                                   <form method="POST" action="{% url 'pacientes:sesion_add' %}" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <div class="modal-body">
-                                      {{ formSesion }}
+                                      <div id="fechaSesion" class="form-group">
+                                        <div class="input-group date">
+                                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{{ formSesion.fecha }}
+                                        </div>
+                                      </div>
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
@@ -347,6 +354,10 @@
     <!-- Custom and plugin javascript -->
     <script src="{% static "js/inspinia.js" %}"></script>
     <script src="{% static "js/plugins/pace/pace.min.js" %}"></script>
+    <script src="{% static "js/plugins/slimscroll/jquery.slimscroll.min.js" %}></script>
+
+    <!-- Data picker -->
+    <script src="{% static "js/plugins/datapicker/bootstrap-datepicker.js" %}"></script>
 
     <!-- jQuery UI -->
     <script src="{% static "js/plugins/jquery-ui/jquery-ui.min.js" %}"></script>
@@ -383,6 +394,13 @@
             $("#informes").addClass("hidden");
             $("#horario").removeClass("hidden");
           });
+          $('#fechaSesion .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
         });
     </script>
 
