@@ -56,10 +56,12 @@ def paciente_detail(request, pk):
     View that show the patient detail, patient is retrieved by primary key
     '''
     paciente = get_object_or_404(Paciente, pk=pk)
+    sesiones = Sesion.objects.filter(paciente=pk)
+    print(sesiones)
     formSesion = SesionForm(request.POST or None, request.FILES or None)
     context = {"paciente": paciente, "formSesion": formSesion,
-               "sesiones_box": "visbible", "informes_box": "hidden",
-               "horario_box": "hidden"}
+               "sesiones_box": "visible", "informes_box": "hidden",
+               "horario_box": "hidden", "sesiones": sesiones}
     return render(request, 'paciente_detail.html', context)
 
 
@@ -92,12 +94,9 @@ def sesion_add(request):
     '''
     View that add a tutor into the system
     '''
-    print("Por si no pasara.....")
     if request.method == 'POST':
         form = SesionForm(request.POST or None, request.FILES or None)
-        print("Ok metodo==POST")
         if form.is_valid():
-            print("Ok formulario valido")
             instance = form.save(commit=False)
             instance.save()
             return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
