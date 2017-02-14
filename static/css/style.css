@@ -8403,3 +8403,8 @@ body.md-skin {
     margin: 0;
   }
 }
+
+/* Modified because clockpicker control need to show properly in modal windows */
+.clockpicker-popover {
+  z-index: 9999 !important;
+}

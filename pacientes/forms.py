@@ -47,8 +47,8 @@ class SesionForm(forms.ModelForm):
             'paciente': forms.Select(attrs={'class': 'form-control'}),
             'terapeutas': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'fecha': forms.TextInput(attrs={'class': 'form-control'}),
-            'hora_ini': forms.DateTimeInput(attrs={'class': 'form-control', 'format': '%H:%M'}),
-            'hora_fin': forms.DateTimeInput(attrs={'class': 'form-control', 'format': '%H:%M'}),
+            'hora_ini': forms.TextInput(attrs={'class': 'form-control'}),
+            'hora_fin': forms.TextInput(attrs={'class': 'form-control'}),
             'info': forms.Textarea(attrs={'class': 'form-control'}),
             'doc': forms.FileInput(attrs={'class': 'form-control'}),
         }
