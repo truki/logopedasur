@@ -204,7 +204,7 @@
         </div>
       </div>
       <div class="col-md-9">
-        <div id="sesiones" class="ibox float-e-margins">
+        <div id="sesiones" class="ibox float-e-margins {% if sesiones_box == "hidden" %}hidden{% endif %}">
                         <div class="ibox-title">
                             <h5>Sesiones</h5>
                             <div class="ibox-tools">
@@ -325,7 +325,7 @@
                         </script>
 
         </div>
-        <div id="informes" class="ibox float-e-margins">
+        <div id="informes" class="ibox float-e-margins {% if informes_box == "hidden" %}hidden{% endif %}">
                         <div class="ibox-title">
                             <h5>Informes</h5>
                             <div class="ibox-tools">
@@ -367,7 +367,7 @@
                             </table>
                         </div>
         </div>
-        <div id="horario" class="ibox float-e-margins">
+        <div id="horario" class="ibox float-e-margins {% if horario_box == "hidden" %}hidden{% endif %}">
           <div class="ibox-title">
             <h5>Horario</h5>
             <div class="ibox-tools">

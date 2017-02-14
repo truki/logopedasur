@@ -57,7 +57,9 @@ def paciente_detail(request, pk):
     '''
     paciente = get_object_or_404(Paciente, pk=pk)
     formSesion = SesionForm(request.POST or None, request.FILES or None)
-    context = {"paciente": paciente, "formSesion": formSesion}
+    context = {"paciente": paciente, "formSesion": formSesion,
+               "sesiones_box": "visbible", "informes_box": "hidden",
+               "horario_box": "hidden"}
     return render(request, 'paciente_detail.html', context)
 
 
