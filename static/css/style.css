@@ -8406,5 +8406,5 @@ body.md-skin {
 
 /* Modified because clockpicker control need to show properly in modal windows */
 .clockpicker-popover {
-  z-index: 9999 !important;
+  z-index: 999999 !important;
 }
