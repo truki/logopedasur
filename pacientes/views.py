@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 
-from .models import Paciente, Tutor, Sesion
+from .models import Paciente, Tutor, Sesion, Informe
 from .forms import PacienteForm, TutorForm, SesionForm, InformeForm
 from horario.forms import HorarioForm
 from horario.models import ReglasHorario
@@ -59,6 +59,7 @@ def paciente_detail(request, pk):
     '''
     paciente = get_object_or_404(Paciente, pk=pk)
     sesiones = Sesion.objects.filter(paciente=pk)
+    informes = Informe.objects.filter(paciente=pk)
     horarios = ReglasHorario.objects.filter(paciente=pk)
 
     formSesion = SesionForm(request.POST or None, request.FILES or None)
@@ -69,7 +70,7 @@ def paciente_detail(request, pk):
                "formInforme": formInforme, "formHorario": formHorario,
                "sesiones_box": "visible", "informes_box": "hidden",
                "horario_box": "hidden", "sesiones": sesiones,
-               "horarios": horarios}
+               "horarios": horarios, "informes": informes}
     return render(request, 'paciente_detail.html', context)
 
 
@@ -107,6 +108,7 @@ def sesion_add(request):
         if form.is_valid():
             instance = form.save(commit=False)
             instance.save()
+            form.save_m2m()
             return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
 
     print("Ok formulario NO valido")
@@ -118,7 +120,19 @@ def informe_add(request):
     '''
     View that add a tutor into the system
     '''
-    pass
+    '''
+    View that add a tutor into the system
+    '''
+    if request.method == 'POST':
+        form = InformeForm(request.POST or None, request.FILES or None)
+        print(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+            form.save_m2m()
+            return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
+
+    return render(request, 'pacientes_index.html', {})
 
 
 @login_required
@@ -132,6 +146,7 @@ def horario_paciente_add(request, pk):
         if form.is_valid():
             instance = form.save(commit=False)
             instance.save()
+            form.save_m2m()
             return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
 
     return render(request, 'pacientes_index.html', {})

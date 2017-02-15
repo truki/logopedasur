@@ -90,7 +90,7 @@ class Informe(models.Model):
     terapeutas = models.ManyToManyField(Terapeuta)
     titulo = models.CharField(max_length=256, blank=True, null=True)
     fecha_informe = models.DateField(blank=True, null=True)
-    fecha_modificacion = models.DateField()
+    fecha_modificacion = models.DateField(auto_now_add=True)
     fichero = models.FileField(upload_to='pacientes/uploads/%Y/%m/%d/', null=True, blank=True)
 
     def __str__(self):
