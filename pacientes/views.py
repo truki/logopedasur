@@ -7,6 +7,8 @@ from django.shortcuts import render, get_object_or_404
 
 from .models import Paciente, Tutor, Sesion
 from .forms import PacienteForm, TutorForm, SesionForm, InformeForm
+from horario.forms import HorarioForm
+from horario.models import ReglasHorario
 
 # Create your views here.
 
@@ -57,13 +59,17 @@ def paciente_detail(request, pk):
     '''
     paciente = get_object_or_404(Paciente, pk=pk)
     sesiones = Sesion.objects.filter(paciente=pk)
-    print(sesiones)
+    horarios = ReglasHorario.objects.filter(paciente=pk)
+
     formSesion = SesionForm(request.POST or None, request.FILES or None)
     formInforme = InformeForm(request.POST or None, request.FILES or None)
+    formHorario = HorarioForm(request.POST or None)
+
     context = {"paciente": paciente, "formSesion": formSesion,
-               "formInforme": formInforme, "sesiones_box": "visible",
-               "informes_box": "hidden", "horario_box": "hidden",
-               "sesiones": sesiones}
+               "formInforme": formInforme, "formHorario": formHorario,
+               "sesiones_box": "visible", "informes_box": "hidden",
+               "horario_box": "hidden", "sesiones": sesiones,
+               "horarios": horarios}
     return render(request, 'paciente_detail.html', context)
 
 
@@ -113,3 +119,19 @@ def informe_add(request):
     View that add a tutor into the system
     '''
     pass
+
+
+@login_required
+def horario_paciente_add(request, pk):
+    '''
+    View that add a tutor into the system
+    '''
+    if request.method == 'POST':
+        form = HorarioForm(request.POST)
+        print(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+            return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
+
+    return render(request, 'pacientes_index.html', {})
