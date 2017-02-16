@@ -244,7 +244,7 @@
                                       </div>
                                       <div class="form-group">
                                         <label class="col-lg-2 control-label">Hora inicio:</label>
-                                        <div class="input-group clockpicker col-lg-10" data-autoclose="true">
+                                        <div class="input-group clockpicker col-lg-10" data-placement="top" data-autoclose="true">
                                             <span class="input-group-addon">
                                                 <span class="fa fa-clock-o"></span>
                                             </span>
@@ -253,7 +253,7 @@
                                       </div>
                                       <div class="form-group">
                                         <label class="col-lg-2 control-label">Hora fin:</label>
-                                        <div class="input-group clockpicker col-lg-10" data-autoclose="true">
+                                        <div class="input-group clockpicker col-lg-10" data-placement="top" data-autoclose="true">
                                             <span class="input-group-addon">
                                                 <span class="fa fa-clock-o"></span>
                                             </span>
@@ -434,7 +434,7 @@
                     </div>
                     <div class="form-group">
                       <label class="col-lg-2 control-label">Hora inicio:</label>
-                      <div class="input-group clockpicker col-lg-10" data-autoclose="true">
+                      <div class="input-group clockpicker col-lg-10" data-placement="top" data-autoclose="true">
                           <span class="input-group-addon">
                               <span class="fa fa-clock-o"></span>
                           </span>
@@ -443,7 +443,7 @@
                     </div>
                     <div class="form-group">
                       <label class="col-lg-2 control-label">Hora fin:</label>
-                      <div class="input-group clockpicker col-lg-10" data-autoclose="true">
+                      <div class="input-group clockpicker col-lg-10" data-placement="top" data-autoclose="true">
                           <span class="input-group-addon">
                               <span class="fa fa-clock-o"></span>
                           </span>
@@ -559,17 +559,20 @@
                 keyboardNavigation: false,
                 forceParse: false,
                 calendarWeeks: true,
-                autoclose: true
+                autoclose: true,
+                orientation: "auto"
           });
           $('#fechaInforme .input-group.date').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
                 forceParse: false,
                 calendarWeeks: true,
-                autoclose: true
+                autoclose: true,
+                orientation: "auto"
           });
 
           $('.clockpicker').clockpicker();
+
         });
     </script>
 
