@@ -96,3 +96,37 @@ class Informe(models.Model):
     def __str__(self):
         return self.paciente.nombre + " "
         + self.fecha_informe.strftime('%d/%m/%Y') + self.titulo
+
+class TipoEventoAux(models.Model):
+    '''
+    Clase auxialiar donde se almacenan los tipos de eventos:
+    * Sesion.
+    * Informe.
+    * Familiar.
+    * Escolar.
+    * Medico
+    * Otro
+    '''
+
+    nombre = models.CharField(max_length=128, null=False, blank=False)
+
+    def __str__(self):
+        return self.nombre
+
+class Evento(models.Model):
+    '''
+    Clase que almacenará un registro se todos los eventos de un paciente,
+    sesiones, informes, y cualquier otro que merezca interes.
+    Cuando en las tablas Sesion e Informe se inserte un registro, se
+    inserta un evento del tipo correspondiente en esta tabla
+    '''
+    fecha = models.DateField()
+    paciente = models.ForeignKey(Paciente)
+    sesion = models.ForeignKey(Sesion, on_delete=models.CASCADE, null=True, blank=True)
+    informe = models.ForeignKey(Informe, on_delete=models.CASCADE, null=True, blank=True)
+    titulo = models.CharField(max_length=256, null=True, blank=True)
+    info = models.TextField(null=True, blank=True)
+    tipo = models.ForeignKey(TipoEventoAux)
+
+    def __str__(self):
+        return self.paciente.nombre + " " + self.fecha.strftime('%d/%m/%Y') + " " + self.tipo.nombre
