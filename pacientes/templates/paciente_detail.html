@@ -197,12 +197,12 @@
                                             <button id="horarioButton" data-toggle="pacienteButton" type="button" class="btn btn-default btn-sm btn-block btn-outline"><i class="fa fa-calendar"></i> Horario</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <button id="eventoButton" data-toggle="pacienteButton" type="button" class="btn btn-default btn-sm btn-block btn-outline"><i class="fa fa-clock-o"></i> Otro evento</button>
+                                            <button id="eventosButton" data-toggle="pacienteButton" type="button" class="btn btn-default btn-sm btn-block btn-outline"><i class="fa fa-clock-o"></i> Eventos</button>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button id="horarioButton" type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-calendar"></i> Timeline <i class="fa fa-calendar"></i></button>
+                                            <button id="timlineButton" type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-calendar"></i> Timeline <i class="fa fa-calendar"></i></button>
                                         </div>
                                     </div>
 
@@ -492,6 +492,90 @@
           </div>
         </div>
       </div>
+      <div class="col-md-9">
+        <div id="evento" class="ibox float-e-margins {% if eventos_box == "hidden" %}hidden{% endif %}">
+        <div class="ibox-title">
+          <h5>Eventos</h5>
+          <div class="ibox-tools">
+            <a class="btn btn-white btn-bitbucket" data-toggle="modal" data-target="#nuevoEventoModal">
+              <i class="fa fa-plus"></i>
+            </a>
+          </div>
+        </div>
+        <div class="modal inmodal" id="nuevoEventoModal" tabindex="-1" role="dialog" aria-hidden="true" style="display:none;">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content animated bounceInRight">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <i class="fa fa-calendar modal-icon"></i>
+                <h4 class="modal-title">Nuevo evento</h4>
+              </div>
+              <form method="POST" action="{% url 'pacientes:horario_paciente_add' paciente.pk %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">Paciente:</label>
+                    <div class="input-group col-lg-10">
+                      {{ formEvento.paciente }}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">Título:</label>
+                    <div class="input-group col-lg-10">
+                      {{ formEvento.titulo }}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">Día:</label>
+                    <div class="input-group col-lg-10">
+                      {{ formEvento.fecha }}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">Tipo de evento:</label>
+                    <div class="input-group col-lg-10">
+                      {{ formEvento.tipo }}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">Información:</label>
+                    <div class="input-group col-lg-10">
+                      {{ formEvento.info }}
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Insertar evento</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="ibox-content">
+          <table id="tablaEventos" class="table">
+            <thead>
+              <tr>
+                <th>Día</th>
+                <th>Tipo</th>
+                <th>Titulo</th>
+                <th>Info</th>
+              </tr>
+            </thead>
+              <tbody>
+                {% for evento in eventos %}
+                <tr>
+                  <td>{{ evento.fecha }}</td>
+                  <td>{{ evento.tipo }}</td>
+                  <td>{{ evento.titulo }}</td>
+                  <td>{{ evento.info }} </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 {% endblock %}
@@ -551,17 +635,28 @@
             $("#sesiones").removeClass('hidden');
             $("#informes").addClass('hidden');
             $("#horario").addClass('hidden');
+            $("#evento").addClass("hidden");
           });
           $("#informesButton").on('click', function(){
             $("#sesiones").addClass("hidden");
             $("#informes").removeClass("hidden");
             $("#horario").addClass("hidden");
+            $("#evento").addClass("hidden");
           });
           $("#horarioButton").on('click', function(){
             $("#sesiones").addClass("hidden");
             $("#informes").addClass("hidden");
             $("#horario").removeClass("hidden");
+            $("#evento").addClass("hidden");
           });
+
+          $("#eventosButton").on('click', function(){
+            $("#sesiones").addClass("hidden");
+            $("#informes").addClass("hidden");
+            $("#horario").addClass("hidden");
+            $("#evento").removeClass("hidden");
+          });
+
           $('#fechaSesion .input-group.date').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,

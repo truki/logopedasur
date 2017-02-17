@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Paciente, Tutor, Sesion, Informe
+from .models import Paciente, Tutor, Sesion, Informe, Evento
 
 class PacienteForm(forms.ModelForm):
     '''
@@ -67,4 +67,20 @@ class InformeForm(forms.ModelForm):
             'terapeutas': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'fecha_informe': forms.TextInput(attrs={'class': 'form-control'}),
             'fichero': forms.FileInput(attrs={'class': 'form-control'}),
+        }
+
+
+class EventoForm(forms.ModelForm):
+    '''
+    Formulario para insertar un nuevo evento
+    '''
+    class Meta:
+        model = Evento
+        fields = '__all__'
+        widgets = {
+            'paciente': forms.Select(attrs={'class': 'form-control'}),
+            'fecha': forms.TextInput(attrs={'class': 'form-control'}),
+            'titulo': forms.TextInput(attrs={'class': 'form-control'}),
+            'tipo': forms.Select(attrs={'class': 'form-control'}),
+            'info': forms.Textarea(attrs={'class': 'form-control'}),
         }

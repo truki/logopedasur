@@ -2,6 +2,7 @@
 static/*
 !static/css/
 !static/js/
+!static/img/
 
 media/*
 

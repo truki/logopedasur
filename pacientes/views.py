@@ -5,8 +5,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 
-from .models import Paciente, Tutor, Sesion, Informe
-from .forms import PacienteForm, TutorForm, SesionForm, InformeForm
+from .models import Paciente, Tutor, Sesion, Informe, Evento, TipoEventoAux
+from .forms import PacienteForm, TutorForm, SesionForm, InformeForm, EventoForm
 from horario.forms import HorarioForm
 from horario.models import ReglasHorario
 
@@ -61,16 +61,29 @@ def paciente_detail(request, pk):
     sesiones = Sesion.objects.filter(paciente=pk)
     informes = Informe.objects.filter(paciente=pk)
     horarios = ReglasHorario.objects.filter(paciente=pk)
+    # excluded Sesion and Reports events in otroEventos query
+    otroEventos = Evento.objects.filter(paciente=pk).exclude(tipo_id=1).exclude(tipo_id=2)
 
     formSesion = SesionForm(request.POST or None, request.FILES or None)
+    formSesion.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
     formInforme = InformeForm(request.POST or None, request.FILES or None)
+    formInforme.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
     formHorario = HorarioForm(request.POST or None)
+    formHorario.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    formEvento = EventoForm(request.POST or None)
+    formEvento.fields["tipo"].queryset = TipoEventoAux.objects.all().exclude(pk=1).exclude(pk=2)
+    formEvento.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
 
     context = {"paciente": paciente, "formSesion": formSesion,
                "formInforme": formInforme, "formHorario": formHorario,
-               "sesiones_box": "visible", "informes_box": "hidden",
-               "horario_box": "hidden", "sesiones": sesiones,
-               "horarios": horarios, "informes": informes}
+               "formEvento": formEvento, "sesiones_box": "visible",
+               "informes_box": "hidden", "horario_box": "hidden",
+               "eventos_box": "hidden", "sesiones": sesiones,
+               "horarios": horarios, "informes": informes,
+               "eventos": otroEventos}
     return render(request, 'paciente_detail.html', context)
 
 
