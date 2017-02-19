@@ -6,6 +6,8 @@ from django.shortcuts import render
 from django import forms
 from main.forms import UsuarioForm, PerfilTerapeutaForm
 
+from pacientes.models import Paciente
+
 # Create your views here.
 
 
@@ -14,7 +16,22 @@ from main.forms import UsuarioForm, PerfilTerapeutaForm
 # al formulario de login
 @login_required
 def index(request):
-    return render(request, 'index.html', {})
+    total_pacientes = Paciente.objects.count()
+    enTerapia_pacientes = Paciente.objects.filter(estado__pk=2).count()
+    enTerapia_pacientes_porciento = int((enTerapia_pacientes * 100) / total_pacientes)
+    enAlta_pacientes = Paciente.objects.filter(estado__pk=3).count()
+    enAlta_pacientes_porciento = int((enAlta_pacientes * 100) / total_pacientes)
+    otros_pacientes = total_pacientes - enTerapia_pacientes - enAlta_pacientes
+    otros_pacientes_porciento = int((otros_pacientes * 100) / total_pacientes)
+
+    context = {"total_pacientes": total_pacientes,
+               "enTerapia_pacientes": enTerapia_pacientes,
+               "enTerapia_pacientes_porciento": enTerapia_pacientes_porciento,
+               "enAlta_pacientes": enAlta_pacientes,
+               "enAlta_pacientes_porciento": enAlta_pacientes_porciento,
+               "otros_pacientes": otros_pacientes,
+               "otros_pacientes_porciento": otros_pacientes_porciento}
+    return render(request, 'index.html', context)
 
 
 # Vista relacionada con el registro de un usuario

@@ -32,6 +32,21 @@ class PacienteManager(models.Manager):
         return super(PacienteManager, self).filter(nombre="Leo")
 
 
+class EstadoPacienteAux(models.Model):
+    '''
+    Tabla auxililar para almacenar los estados de un paciente
+    Entrevista preliminar, En Terapia, Alta, Pendiente de Valoracion medica,
+    Pendiente de valoración educativa, Alta temporal, otro
+    '''
+
+    estado = models.CharField(max_length=128, blank=True, null=True)
+    descripcion_estado = models.CharField(max_length=256, blank=True, null=True)
+
+    def __str__(self):
+        return self.estado
+
+
+
 class Paciente(models.Model):
     '''
         Tabla Pacientes
@@ -47,7 +62,10 @@ class Paciente(models.Model):
     localidad = models.CharField(max_length=128, blank=True, null=True)
     telefono = models.CharField(max_length=12, blank=True)
     email = models.EmailField(max_length=256, blank=True)
-    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE)
+    estado = models.ForeignKey(EstadoPacienteAux, blank=True, null=True)
+    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, blank=True, null=True)
+    terapeutas = models.ManyToManyField(Terapeuta)
+
 
     objects = models.Manager()  # Default model manager
     manager = PacienteManager()  # Paciente model manager

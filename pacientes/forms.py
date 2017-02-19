@@ -17,6 +17,7 @@ class PacienteForm(forms.ModelForm):
             'telefono': forms.TextInput(attrs={'class': 'form-control'}),
             'imagen': forms.FileInput(attrs={'class': 'form-control'}),
             'tutor': forms.Select(attrs={'class': 'form-control'}),
+            'estado': forms.Select(attrs={'class': 'form-control'}),
         }
 
 

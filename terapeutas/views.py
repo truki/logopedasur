@@ -8,6 +8,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Terapeuta
 from .forms import TerapeutaForm
 
+from pacientes.models import Sesion, Informe, Paciente
 
 # Create your views here.
 
@@ -59,5 +60,12 @@ def terapeuta_detail(request, pk):
     View that show the terapeuta detail, terapeuta is retrieved by primary key
     '''
     terapeuta = get_object_or_404(Terapeuta, pk=pk)
-    context = {"terapeuta": terapeuta}
+    sesiones = Sesion.objects.filter(terapeutas__pk=pk)
+    informes = Informe.objects.filter(terapeutas__pk=pk)
+    pacientes = Paciente.objects.filter(terapeutas__pk=pk)
+    context = {"terapeuta": terapeuta,
+               "pacientes": pacientes, "sesiones":sesiones, "informes": sesiones,
+               "sesiones_box": "visible", "informes_box": "hidden",
+               "horario_box": "hidden", "eventos_box": "hidden",
+               "pacientes_box": "hidden"}
     return render(request, 'terapeuta_detail.html', context)
