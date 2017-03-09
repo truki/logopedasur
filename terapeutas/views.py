@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -43,9 +44,13 @@ def terapeutas_add(request):
     '''
 
     form = TerapeutaForm(request.POST or None, request.FILES or None)
+    print("request.POST {0}".format(request.POST))
+
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
+        form.save_m2m()
+        messages.success(request, "Terapeuta ha sido insertado")
         return HttpResponseRedirect(reverse('terapeutas:terapeutas_index'))
 
     context = {
