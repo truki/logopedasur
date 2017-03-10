@@ -258,4 +258,12 @@
 
     <!-- Toastr -->
     <script src="{% static "js/plugins/toastr/toastr.min.js" %}"></script>
+
+    <script type="text/javascript">
+      {% if messages %}
+        {% for message in messages %}
+          toastr.info('{{ message }}')
+        {% endfor %}
+      {% endif %}
+    </script>
 {% endblock %}

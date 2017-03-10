@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
@@ -41,14 +42,19 @@ def pacientes_add(request):
     View that add a patient into the system
     '''
     form = PacienteForm(request.POST or None, request.FILES or None)
+    print("request.POST {0}".format(request.POST))
     if form.is_valid():
+        print("HE PASADO POR is_valid() !!!!!!!!!!!!!!!!!")
         instance = form.save(commit=False)
         instance.save()
+        form.save_m2m()
+        messages.success(request, "Se ha insertado un Paciente")
         return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
 
     context = {
         "form": form
     }
+    print("NOOOOOOOO HE PASADO POR is_valid() !!!!!!!!!!!!!!!!!")
     return render(request, 'pacientes_add.html', context)
 
 

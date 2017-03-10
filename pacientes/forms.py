@@ -8,7 +8,7 @@ class PacienteForm(forms.ModelForm):
     '''
     class Meta:
         model = Paciente
-        fields = '__all__'
+        fields = ('nombre', 'apellidos', 'dni', 'direccion', 'telefono', 'imagen', 'tutor', 'estado')
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control'}),
             'apellidos': forms.TextInput(attrs={'class': 'form-control'}),
