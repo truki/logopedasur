@@ -194,26 +194,37 @@
 
             </div>
         </div>
+      {% empty %}
+        <div class="col-md-6 col-md-offset-3">
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+                <i class="fa fa-warning"></i> Warning
+            </div>
+            <div class="panel-body">
+                <p><h2>No hay terapeutas en base de datos, quizás deberías empezar por crear uno ¿no?</h2></p>
+            </div>
+          </div>
+          <center><button type="button" class="btn btn-w-m btn-default"><a href="{% url "terapeutas:terapeutas_add" %}">Nuevo terapeuta</a></button></center>
+        </div>
       {% endfor %}
-
-
-
     </div>
-    <div class="text-center">
-        <ul class="pagination">
-          {% if terapeutas.has_previous %}
-            <li><a href="?page={{ terapeutas.previous_page_number }}">&laquo;</a></li>
-          {% else %}
-            <li class="disable"><a href="#">&laquo;</a></li>
-          {% endif %}
-            <li class="active"><a href="#">{{ terapeutas.number }}</a></li>
-          {% if terapeutas.has_next %}
-            <li><a href="?page={{ terapeutas.next_page_number }}">&raquo;</a></li>
-          {% else %}
-            <li class="disable"><a href="#">&raquo;</a></li>
-          {% endif %}
-        </ul>
-    </div>
+    {% if terapeutas.count > 0 %}
+      <div class="text-center">
+          <ul class="pagination">
+            {% if terapeutas.has_previous %}
+              <li><a href="?page={{ terapeutas.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="disable"><a href="#">&laquo;</a></li>
+            {% endif %}
+              <li class="active"><a href="#">{{ terapeutas.number }}</a></li>
+            {% if terapeutas.has_next %}
+              <li><a href="?page={{ terapeutas.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="disable"><a href="#">&raquo;</a></li>
+            {% endif %}
+          </ul>
+      </div>
+    {% endif %}
   </div>
 {% endblock %}
 

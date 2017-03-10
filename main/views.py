@@ -17,12 +17,20 @@ from pacientes.models import Paciente
 @login_required
 def index(request):
     total_pacientes = Paciente.objects.count()
-    enTerapia_pacientes = Paciente.objects.filter(estado__pk=2).count()
-    enTerapia_pacientes_porciento = int((enTerapia_pacientes * 100) / total_pacientes)
-    enAlta_pacientes = Paciente.objects.filter(estado__pk=3).count()
-    enAlta_pacientes_porciento = int((enAlta_pacientes * 100) / total_pacientes)
-    otros_pacientes = total_pacientes - enTerapia_pacientes - enAlta_pacientes
-    otros_pacientes_porciento = int((otros_pacientes * 100) / total_pacientes)
+    if total_pacientes > 0:
+        enTerapia_pacientes = Paciente.objects.filter(estado__pk=2).count()
+        enTerapia_pacientes_porciento = int((enTerapia_pacientes * 100) / total_pacientes)
+        enAlta_pacientes = Paciente.objects.filter(estado__pk=3).count()
+        enAlta_pacientes_porciento = int((enAlta_pacientes * 100) / total_pacientes)
+        otros_pacientes = total_pacientes - enTerapia_pacientes - enAlta_pacientes
+        otros_pacientes_porciento = int((otros_pacientes * 100) / total_pacientes)
+    else:
+        enTerapia_pacientes = 0
+        enTerapia_pacientes_porciento = 0
+        enAlta_pacientes = 0
+        enAlta_pacientes_porciento = 0
+        otros_pacientes = 0
+        otros_pacientes_porciento = 0
 
     context = {"total_pacientes": total_pacientes,
                "enTerapia_pacientes": enTerapia_pacientes,
