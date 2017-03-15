@@ -92,6 +92,29 @@ def paciente_detail(request, pk):
                "eventos": otroEventos}
     return render(request, 'paciente_detail.html', context)
 
+@login_required
+def paciente_edit(request, pk):
+    '''
+    View that show the patient edit form foor patient basic info,
+    patient is retrieved by primary key
+    '''
+    paciente = get_object_or_404(Paciente, pk=pk)
+
+    form = PacienteForm(request.POST or None, request.FILES or None,
+                        instance=paciente)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        form.save_m2m()
+        messages.success(request, "Se ha editado el paciente " +
+                         instance.nombre + " " +
+                         instance.apellidos)
+        return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
+
+    context = {
+        "form": form
+    }
+    return render(request, 'pacientes_edit.html', context)
 
 
 # View that show the sesion detail. Sesion is retrieved by its primary key (pk)
