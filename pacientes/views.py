@@ -112,7 +112,8 @@ def paciente_edit(request, pk):
         return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
 
     context = {
-        "form": form
+        "form": form,
+        "paciente": paciente
     }
     return render(request, 'pacientes_edit.html', context)
 

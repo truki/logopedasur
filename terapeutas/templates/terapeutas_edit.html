@@ -152,7 +152,7 @@
 {% block breadcrumbs_block %}
   <div class="row wrapper border-bottom white-bg page-heading">
       <div class="col-lg-10">
-          <h2>Pacientes / Editar / {{ paciente.nombre }} {{ paciente.apellidos }}</h2>
+          <h2>Terapeuta / Editar / {{ terapeuta.nombre }} {{ terapeuta.apellidos }}</h2>
       </div>
   </div>
 {% endblock %}
@@ -163,7 +163,7 @@
       <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Editar paciente</h5>
+              <h5>Editar terapeuta</h5>
                 <div class="ibox-tools">
                   <a class="collapse-link">
                     <i class="fa fa-chevron-up"></i>
@@ -194,25 +194,34 @@
                 <div class="form-group"><label class="col-lg-2 control-label">DNI</label>
                   <div class="col-lg-10">{{ form.dni }}</div>
                 </div>
+                <div class="form-group"><label class="col-lg-2 control-label">Seg. Social</label>
+                  <div class="col-lg-10">{{ form.seg_social }}</div>
+                </div>
                 <div class="form-group"><label class="col-lg-2 control-label">Dirección</label>
                   <div class="col-lg-10">{{ form.direccion }}</div>
+                </div>
+                <div class="form-group"><label class="col-lg-2 control-label">Localidad</label>
+                  <div class="col-lg-10">{{ form.localidad }}</div>
+                </div>
+                <div class="form-group"><label class="col-lg-2 control-label">Provincia</label>
+                  <div class="col-lg-10">{{ form.provincia }}</div>
+                </div>
+                <div class="form-group"><label class="col-lg-2 control-label">Código Postal</label>
+                  <div class="col-lg-10">{{ form.cod_postal }}</div>
                 </div>
                 <div class="form-group"><label class="col-lg-2 control-label">Teléfono</label>
                   <div class="col-lg-10">{{ form.telefono }}</div>
                 </div>
+                <div class="form-group"><label class="col-lg-2 control-label">Titulación/es</label>
+                  <div class="col-lg-10">{{ form.titulaciones }}</div>
+                </div>
                 <div class="form-group"><label class="col-lg-2 control-label">Foto</label>
                   <div class="col-lg-10">{{ form.imagen }}</div>
-                </div>
-                <div class="form-group"><label class="col-lg-2 control-label">Tutor</label>
-                  <div class="col-lg-10">{{ form.tutor }}</div>
-                </div>
-                <div class="form-group"><label class="col-lg-2 control-label">Estado</label>
-                  <div class="col-lg-10">{{ form.estado }}</div>
                 </div>
 
                 <div class="form-group">
                   <div class="col-lg-offset-2 col-lg-10">
-                    <button class="btn btn-sm btn-white" type="submit">Editar paciente</button>
+                    <button class="btn btn-sm btn-white" type="submit">Editar terapeuta</button>
                   </div>
                 </div>
               </form>
