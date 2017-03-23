@@ -8,7 +8,7 @@
 {% load staticfiles %}
 
 {% block title_block %}
-  Pacientes
+  Tutores
 {% endblock %}
 
 {% block head_library_block %}
@@ -158,7 +158,7 @@
 {% block breadcrumbs_block %}
   <div class="row wrapper border-bottom white-bg page-heading">
       <div class="col-lg-10">
-          <h2>Pacientes</h2>
+          <h2>Tutores</h2>
       </div>
   </div>
 {% endblock %}
@@ -166,21 +166,21 @@
 {% block content_block %}
   <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-      {% for paciente in pacientes %}
+      {% for tutor in tutores %}
         <div class="col-lg-3">
             <div class="contact-box center-version">
 
-                <a href="{% url "pacientes:paciente_detail" paciente.pk %}">
+                <a href="{% url "pacientes:tutores_detail" tutor.pk %}">
 
-                    <img alt="image" class="img-circle" src="{{ paciente.imagen.url }}">
-                    <h3 class="m-b-xs"><strong>{{ paciente.nombre }}</strong></h3>
-                    <h3 class="m-b-xs"><strong>{{ paciente.apellidos }}</strong></h3>
+                    <img alt="image" class="img-circle" src="{{ tutor.imagen.url }}">
+                    <h3 class="m-b-xs"><strong>{{ tutor.nombre }}</strong></h3>
+                    <h3 class="m-b-xs"><strong>{{ tutor.apellidos }}</strong></h3>
 
                     <address class="m-t-md">
                         <strong>Twitter, Inc.</strong><br>
                         795 Folsom Ave, Suite 600<br>
                         San Francisco, CA 94107<br>
-                        <abbr title="Phone">P:</abbr> {{ paciente.telefono }}
+                        <abbr title="Phone">P:</abbr> {{ tutor.telefono }}
                     </address>
 
                 </a>
@@ -188,7 +188,7 @@
                     <div class="m-t-xs btn-group">
                         <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
                         <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
-                        <a class="btn btn-xs btn-white" href="{% url "pacientes:paciente_edit" paciente.pk %}"><i class="fa fa-user-plus"></i> Edit</a>
+                        <a class="btn btn-xs btn-white" href="{% url "pacientes:tutores_edit" tutor.pk %}"><i class="fa fa-user-plus"></i> Edit</a>
                     </div>
                 </div>
 
@@ -201,25 +201,25 @@
                   <i class="fa fa-warning"></i> Warning
               </div>
               <div class="panel-body">
-                  <p><h2>No hay pacientes en base de datos, quizás deberías empezar por crear uno</h2></p>
+                  <p><h2>No hay tutores en base de datos, quizás deberías empezar por crear uno</h2></p>
               </div>
             </div>
-            <center><button type="button" class="btn btn-w-m btn-default"><a href="{% url "pacientes:pacientes_add" %}">Nuevo paciente</a></button></center>
+            <center><button type="button" class="btn btn-w-m btn-default"><a href="{% url "pacientes:tutor_add" %}">Nuevo tutor</a></button></center>
 
           </div>
      {% endfor %}
     </div>
-    {% if pacientes.count > 0 %}
+    {% if tutores.count > 0 %}
       <div class="text-center">
           <ul class="pagination">
-            {% if pacientes.has_previous %}
-              <li><a href="?page={{ pacientes.previous_page_number }}">&laquo;</a></li>
+            {% if tutores.has_previous %}
+              <li><a href="?page={{ tutores.previous_page_number }}">&laquo;</a></li>
             {% else %}
               <li class="disable"><a href="#">&laquo;</a></li>
             {% endif %}
-              <li class="active"><a href="#">{{ pacientes.number }}</a></li>
-            {% if pacientes.has_next %}
-              <li><a href="?page={{ pacientes.next_page_number }}">&raquo;</a></li>
+              <li class="active"><a href="#">{{ tutores.number }}</a></li>
+            {% if tutores.has_next %}
+              <li><a href="?page={{ tutores.next_page_number }}">&raquo;</a></li>
             {% else %}
               <li class="disable"><a href="#">&raquo;</a></li>
             {% endif %}
