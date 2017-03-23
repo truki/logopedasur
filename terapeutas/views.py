@@ -74,3 +74,27 @@ def terapeuta_detail(request, pk):
                "horario_box": "hidden", "eventos_box": "hidden",
                "pacientes_box": "hidden"}
     return render(request, 'terapeuta_detail.html', context)
+
+@login_required
+def terapeuta_edit(request, pk):
+    '''
+    View that add a terapeuta into the system
+    '''
+
+    terapeuta = get_object_or_404(Terapeuta, pk=pk)
+    form = TerapeutaForm(request.POST or None, request.FILES or None,
+                         instance=terapeuta)
+
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        form.save_m2m()
+        messages.success(request, "El terapeuta " + instance.nombre +
+                         " " + instance.apellidos + " ha sido editado.")
+        return HttpResponseRedirect(reverse('terapeutas:terapeutas_index'))
+
+    context = {
+        "form": form,
+        "terapeuta": terapeuta
+    }
+    return render(request, 'terapeutas_edit.html', context)

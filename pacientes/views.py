@@ -92,29 +92,36 @@ def paciente_detail(request, pk):
                "eventos": otroEventos}
     return render(request, 'paciente_detail.html', context)
 
+@login_required
+def paciente_edit(request, pk):
+    '''
+    View that show the patient edit form foor patient basic info,
+    patient is retrieved by primary key
+    '''
+    paciente = get_object_or_404(Paciente, pk=pk)
+
+    form = PacienteForm(request.POST or None, request.FILES or None,
+                        instance=paciente)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        form.save_m2m()
+        messages.success(request, "Se ha editado el paciente " +
+                         instance.nombre + " " +
+                         instance.apellidos)
+        return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
+
+    context = {
+        "form": form,
+        "paciente": paciente
+    }
+    return render(request, 'pacientes_edit.html', context)
 
 
 # View that show the sesion detail. Sesion is retrieved by its primary key (pk)
 @login_required
 def sesion_detail(request, pk):
     pass
-
-
-@login_required
-def tutor_add(request):
-    '''
-    View that add a tutor into the system
-    '''
-    form = TutorForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.save()
-        return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
-
-    context = {
-        "form": form
-    }
-    return render(request, 'tutor_add.html', context)
 
 
 @login_required
@@ -169,3 +176,42 @@ def horario_paciente_add(request, pk):
             return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
 
     return render(request, 'pacientes_index.html', {})
+
+
+@login_required
+def tutor_add(request):
+    '''
+    View that add a tutor into the system
+    '''
+    form = TutorForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
+
+    context = {
+        "form": form
+    }
+    return render(request, 'tutor_add.html', context)
+
+@login_required
+def tutor_list(request):
+    '''
+    View that show the tutors of the patients
+    '''
+
+    tutores = Tutor.objects.all().order_by('apellidos', 'nombre')
+    paginator = Paginator(tutores, 8)  # show 8 therapeutas
+
+    page = request.GET.get('page')
+    try:
+        tutores = paginator.page(page)
+    except PageNotAnInteger:
+        # si pagina no es un entero posicionamos en la primera
+        tutores = paginator.page(1)
+    except:
+        # si la pagina está fuera de rango por arriba, nos
+        # posicionamos en la última
+        tutores = paginator.page(paginator.num_pages)
+    context = {"tutores": tutores}
+    return render(request, "tutores_list.html", context)
