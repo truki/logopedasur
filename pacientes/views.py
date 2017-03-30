@@ -230,4 +230,21 @@ def tutores_edit(request, pk):
     '''
     View that show a form to edit the tutors detail
     '''
-    pass
+    tutor = get_object_or_404(Tutor, pk=pk)
+
+    form = TutorForm(request.POST or None, request.FILES or None,
+                        instance=tutor)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        form.save_m2m()
+        messages.success(request, "Se ha editado el tutor " +
+                         instance.nombre + " " +
+                         instance.apellidos)
+        return HttpResponseRedirect(reverse('pacientes:tutores_list'))
+
+    context = {
+        "form": form,
+        "tutor": tutor
+    }
+    return render(request, 'tutores_edit.html', context)

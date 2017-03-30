@@ -19,6 +19,8 @@ class Tutor(models.Model):
     localidad = models.CharField(max_length=128, blank=True, null=True)
     email = models.EmailField(max_length=256, blank=True)
     telefono = models.CharField(max_length=12, blank=True)
+    imagen = models.ImageField(upload_to='tutores', null=True, blank=True)
+
 
     def __str__(self):
         return self.nombre + " " + self.apellidos
