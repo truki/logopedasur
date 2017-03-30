@@ -10,13 +10,9 @@ urlpatterns = [
     url(r'^sesion/(?P<pk>\d+)/$', views.sesion_detail, name='sesion_detail'),
     url(r'^sesion/add/$', views.sesion_add, name='sesion_add'),
     url(r'^tutor/add/$', views.tutor_add, name='tutor_add'),
-<<<<<<< HEAD
     url(r'^tutor/$', views.tutores_list, name='tutores_list'),
     url(r'^tutor/(?P<pk>\d+)/edit/$', views.tutores_edit, name='tutores_edit'),
     url(r'^tutor/(?P<pk>\d+)/$', views.tutores_detail, name='tutores_detail'),
-=======
-    url(r'^tutor/$', views.tutor_list, name='tutor_list'),
->>>>>>> 5a3b2528ae9788be1aa289ea34359c95b365680c
     url(r'^informe/add/$', views.informe_add, name='informe_add'),
     url(r'^(?P<pk>\d+)/horario/add/$', views.horario_paciente_add,
         name='horario_paciente_add'),
