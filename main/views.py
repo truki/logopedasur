@@ -6,7 +6,8 @@ from django.shortcuts import render
 from django import forms
 from main.forms import UsuarioForm, PerfilTerapeutaForm
 
-from pacientes.models import Paciente
+from pacientes.models import Paciente, EstadoPacienteAux, TipoEventoAux
+
 
 # Create your views here.
 
@@ -16,6 +17,21 @@ from pacientes.models import Paciente
 # al formulario de login
 @login_required
 def index(request):
+
+    # Comprobamos tabla auxiliar EstadoPacienteAux
+    estadosPacientes = Paciente.EstadoPacienteAux.count()
+    if estadosPacientes > 0:
+        estadosPacientesAux = True
+    else:
+        estadosPacientesAux = False
+
+    tiposEvento = Paciente.TipoEventoAux.count()
+    if tiposEvento > 0:
+        tiposEventoAux = True
+    else:
+        tiposEventoAux = False
+
+
     total_pacientes = Paciente.objects.count()
     if total_pacientes > 0:
         enTerapia_pacientes = Paciente.objects.filter(estado__pk=2).count()
@@ -38,7 +54,10 @@ def index(request):
                "enAlta_pacientes": enAlta_pacientes,
                "enAlta_pacientes_porciento": enAlta_pacientes_porciento,
                "otros_pacientes": otros_pacientes,
-               "otros_pacientes_porciento": otros_pacientes_porciento}
+               "otros_pacientes_porciento": otros_pacientes_porciento,
+               "estadosPacienteAux": estadosPacientesAux,
+               "tiposEventoAux": tiposEventoAux }
+               
     return render(request, 'index.html', context)
 
 
