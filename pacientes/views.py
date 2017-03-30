@@ -195,7 +195,11 @@ def tutor_add(request):
     return render(request, 'tutor_add.html', context)
 
 @login_required
+<<<<<<< HEAD
 def tutores_list(request):
+=======
+def tutor_list(request):
+>>>>>>> 5a3b2528ae9788be1aa289ea34359c95b365680c
     '''
     View that show the tutors of the patients
     '''
@@ -215,6 +219,7 @@ def tutores_list(request):
         tutores = paginator.page(paginator.num_pages)
     context = {"tutores": tutores}
     return render(request, "tutores_list.html", context)
+<<<<<<< HEAD
 
 
 @login_required
@@ -248,3 +253,5 @@ def tutores_edit(request, pk):
         "tutor": tutor
     }
     return render(request, 'tutores_edit.html', context)
+=======
+>>>>>>> 5a3b2528ae9788be1aa289ea34359c95b365680c
