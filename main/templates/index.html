@@ -214,7 +214,7 @@
           </div>
       </div>
       <div class="row">
-        {% if estadosPacientesAux is False or tiposEventoAux is False %}
+        {% if estadosPacientesAux is False or tiposEventoAux is False or updated is False %}
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title" style="background-color: #ed5565; color: #333">
@@ -255,19 +255,14 @@
                             <td><button type="button" class="btn btn-primary btn-xs">Fix it</button></td>
                         </tr>
                         {% endif %}
+                        {% if updated is False %}
                         <tr>
-                            <td><span class="label label-warning">Critical</span> </td>
-                            <td>La tabla auxiliar de Estados de los paientes está vacía</td>
+                            <td><span class="label label-warning">Warning</span> </td>
+                            <td>Parece que hay pocos datos ¿quieres que introduzcamos algunos por ti?, obviamente serán ficticios.</td>
                             <td>info</td>
                             <td><button type="button" class="btn btn-primary btn-xs">Fix it</button></td>
                         </tr>
-                        <tr>
-                            <td><span class="label label-warning">Critical</span> </td>
-                            <td>La tabla auxiliar de Estados de los paientes está vacía</td>
-                            <td>info</td>
-                            <td><button type="button" class="btn btn-primary btn-xs">Fix it</button></td>
-                        </tr>
-
+                        {% endif %}
                         </tbody>
                     </table>
                 </div>

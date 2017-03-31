@@ -31,6 +31,12 @@ def index(request):
     else:
         tiposEventoAux = False
 
+    test = Paciente.objects.filter(dni = '00000000k')
+    if not(test):
+        updated = False
+    else:
+        updated = True
+
 
     total_pacientes = Paciente.objects.count()
     if total_pacientes > 0:
@@ -58,7 +64,8 @@ def index(request):
                "otros_pacientes": otros_pacientes,
                "otros_pacientes_porciento": otros_pacientes_porciento,
                "estadosPacientesAux": estadosPacientesAux,
-               "tiposEventoAux": tiposEventoAux }
+               "tiposEventoAux": tiposEventoAux,
+               "updated": updated }
 
     return render(request, 'index.html', context)
 
