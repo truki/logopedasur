@@ -137,7 +137,6 @@ def sesion_add(request):
             form.save_m2m()
             return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
 
-    print("Ok formulario NO valido")
     return render(request, 'pacientes_index.html', {})
 
 
@@ -173,6 +172,20 @@ def horario_paciente_add(request, pk):
             instance = form.save(commit=False)
             instance.save()
             form.save_m2m()
+            return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
+
+    return render(request, 'pacientes_index.html', {})
+
+@login_required
+def evento_paciente_add(request, pk):
+    '''
+    View that add an evento to a patient (pk)
+    '''
+    if request.method == 'POST':
+        form = EventoForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
             return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
 
     return render(request, 'pacientes_index.html', {})

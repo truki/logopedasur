@@ -14,6 +14,8 @@ urlpatterns = [
     url(r'^tutor/(?P<pk>\d+)/edit/$', views.tutores_edit, name='tutores_edit'),
     url(r'^tutor/(?P<pk>\d+)/$', views.tutores_detail, name='tutores_detail'),
     url(r'^informe/add/$', views.informe_add, name='informe_add'),
+    url(r'^(?P<pk>\d+)/evento/add/$', views.evento_paciente_add,
+        name='evento_paciente_add'),
     url(r'^(?P<pk>\d+)/horario/add/$', views.horario_paciente_add,
         name='horario_paciente_add'),
 ]
