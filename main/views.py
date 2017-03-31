@@ -48,6 +48,8 @@ def index(request):
         otros_pacientes = 0
         otros_pacientes_porciento = 0
 
+    print("Estados de pacientes aux: {0}".format(str(estadosPacientesAux)))
+    print("tipos de eventos aux: {0}".format(str(tiposEventoAux)))
     context = {"total_pacientes": total_pacientes,
                "enTerapia_pacientes": enTerapia_pacientes,
                "enTerapia_pacientes_porciento": enTerapia_pacientes_porciento,
@@ -55,7 +57,7 @@ def index(request):
                "enAlta_pacientes_porciento": enAlta_pacientes_porciento,
                "otros_pacientes": otros_pacientes,
                "otros_pacientes_porciento": otros_pacientes_porciento,
-               "estadosPacienteAux": estadosPacientesAux,
+               "estadosPacientesAux": estadosPacientesAux,
                "tiposEventoAux": tiposEventoAux }
 
     return render(request, 'index.html', context)

@@ -247,6 +247,14 @@
                             <td><button type="button" class="btn btn-primary btn-xs">Fix it</button></td>
                         </tr>
                         {% endif %}
+                        {% if tiposEventoAux == False %}
+                        <tr>
+                            <td><span class="label label-warning">Critical</span> </td>
+                            <td>La tabla auxiliar de tipos de eventos está vacía</td>
+                            <td>info</td>
+                            <td><button type="button" class="btn btn-primary btn-xs">Fix it</button></td>
+                        </tr>
+                        {% endif %}
                         <tr>
                             <td><span class="label label-warning">Critical</span> </td>
                             <td>La tabla auxiliar de Estados de los paientes está vacía</td>
