@@ -19,13 +19,13 @@ from pacientes.models import Paciente, EstadoPacienteAux, TipoEventoAux
 def index(request):
 
     # Comprobamos tabla auxiliar EstadoPacienteAux
-    estadosPacientes = Paciente.EstadoPacienteAux.count()
+    estadosPacientes = EstadoPacienteAux.objects.count()
     if estadosPacientes > 0:
         estadosPacientesAux = True
     else:
         estadosPacientesAux = False
 
-    tiposEvento = Paciente.TipoEventoAux.count()
+    tiposEvento = TipoEventoAux.objects.count()
     if tiposEvento > 0:
         tiposEventoAux = True
     else:
@@ -57,7 +57,7 @@ def index(request):
                "otros_pacientes_porciento": otros_pacientes_porciento,
                "estadosPacienteAux": estadosPacientesAux,
                "tiposEventoAux": tiposEventoAux }
-               
+
     return render(request, 'index.html', context)
 
 
