@@ -229,7 +229,7 @@
                                     <i class="fa fa-video-camera modal-icon"></i>
                                     <h4 class="modal-title">Nueva sesión</h4>
                                   </div>
-                                  <form method="POST" action="{% url 'pacientes:sesion_add' %}" enctype='multipart/form-data'>
+                                  <form method="POST" action="{% url 'pacientes:sesion_paciente_add' paciente.pk %}" enctype='multipart/form-data'>
                                     {% csrf_token %}
                                     <div class="modal-body">
                                       <div class="form-group">
@@ -334,7 +334,7 @@
                                 <i class="fa fa-file-pdf-o modal-icon"></i>
                                 <h4 class="modal-title">Nuevo informe</h4>
                               </div>
-                              <form method="POST" action="{% url 'pacientes:informe_add' %}" enctype='multipart/form-data'>
+                              <form method="POST" action="{% url 'pacientes:informe_paciente_add' paciente.pk %}" enctype='multipart/form-data'>
                                 {% csrf_token %}
                                 <div class="modal-body">
                                   <div class="form-group">

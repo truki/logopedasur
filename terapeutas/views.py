@@ -98,3 +98,15 @@ def terapeuta_edit(request, pk):
         "terapeuta": terapeuta
     }
     return render(request, 'terapeutas_edit.html', context)
+
+@login_required
+def sesiones_terapeuta(request, pk):
+    pass
+
+@login_required
+def pacientes_terapeuta(request, pk):
+    pass
+
+@login_required
+def informes_terapeuta(request, pk):
+    pass

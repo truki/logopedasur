@@ -125,29 +125,83 @@ def sesion_detail(request, pk):
 
 
 @login_required
-def sesion_add(request):
+def sesion_paciente_add(request, pk):
     '''
     View that add a tutor into the system
     '''
+    paciente = get_object_or_404(Paciente, pk=pk)
+    sesiones = Sesion.objects.filter(paciente=pk)
+    informes = Informe.objects.filter(paciente=pk)
+    horarios = ReglasHorario.objects.filter(paciente=pk)
+    # excluded Sesion and Reports events in otroEventos query
+    otroEventos = Evento.objects.filter(paciente=pk).exclude(tipo_id=1).exclude(tipo_id=2)
+
+    formSesion = SesionForm(request.POST or None, request.FILES or None)
+    formSesion.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    formInforme = InformeForm(request.POST or None, request.FILES or None)
+    formInforme.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    formHorario = HorarioForm(request.POST or None)
+    formHorario.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    formEvento = EventoForm(request.POST or None)
+    formEvento.fields["tipo"].queryset = TipoEventoAux.objects.all().exclude(pk=1).exclude(pk=2)
+    formEvento.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    context = {"paciente": paciente, "formSesion": formSesion,
+               "formInforme": formInforme, "formHorario": formHorario,
+               "formEvento": formEvento, "sesiones_box": "visible",
+               "informes_box": "hidden", "horario_box": "hidden",
+               "eventos_box": "hidden", "sesiones": sesiones,
+               "horarios": horarios, "informes": informes,
+               "eventos": otroEventos}
+
     if request.method == 'POST':
         form = SesionForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.save()
             form.save_m2m()
-            return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
+            return render(request, 'paciente_detail.html', context)
 
-    return render(request, 'pacientes_index.html', {})
+
+    return render(request, 'paciente_detail.html', context)
 
 
 @login_required
-def informe_add(request):
+def informe_paciente_add(request,pk):
     '''
-    View that add a tutor into the system
+    View that add a report to a patient
     '''
-    '''
-    View that add a tutor into the system
-    '''
+    paciente = get_object_or_404(Paciente, pk=pk)
+    sesiones = Sesion.objects.filter(paciente=pk)
+    informes = Informe.objects.filter(paciente=pk)
+    horarios = ReglasHorario.objects.filter(paciente=pk)
+    # excluded Sesion and Reports events in otroEventos query
+    otroEventos = Evento.objects.filter(paciente=pk).exclude(tipo_id=1).exclude(tipo_id=2)
+
+    formSesion = SesionForm(request.POST or None, request.FILES or None)
+    formSesion.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    formInforme = InformeForm(request.POST or None, request.FILES or None)
+    formInforme.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    formHorario = HorarioForm(request.POST or None)
+    formHorario.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    formEvento = EventoForm(request.POST or None)
+    formEvento.fields["tipo"].queryset = TipoEventoAux.objects.all().exclude(pk=1).exclude(pk=2)
+    formEvento.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    context = {"paciente": paciente, "formSesion": formSesion,
+               "formInforme": formInforme, "formHorario": formHorario,
+               "formEvento": formEvento, "sesiones_box": "hidden",
+               "informes_box": "visible", "horario_box": "hidden",
+               "eventos_box": "hidden", "sesiones": sesiones,
+               "horarios": horarios, "informes": informes,
+               "eventos": otroEventos}
+
     if request.method == 'POST':
         form = InformeForm(request.POST or None, request.FILES or None)
         print(request.POST)
@@ -155,9 +209,9 @@ def informe_add(request):
             instance = form.save(commit=False)
             instance.save()
             form.save_m2m()
-            return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
+            return render(request, 'paciente_detail.html', context)
 
-    return render(request, 'pacientes_index.html', {})
+    return render(request, 'paciente_detail.html', context)
 
 
 @login_required
@@ -165,6 +219,34 @@ def horario_paciente_add(request, pk):
     '''
     View that add a tutor into the system
     '''
+    paciente = get_object_or_404(Paciente, pk=pk)
+    sesiones = Sesion.objects.filter(paciente=pk)
+    informes = Informe.objects.filter(paciente=pk)
+    horarios = ReglasHorario.objects.filter(paciente=pk)
+    # excluded Sesion and Reports events in otroEventos query
+    otroEventos = Evento.objects.filter(paciente=pk).exclude(tipo_id=1).exclude(tipo_id=2)
+
+    formSesion = SesionForm(request.POST or None, request.FILES or None)
+    formSesion.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    formInforme = InformeForm(request.POST or None, request.FILES or None)
+    formInforme.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    formHorario = HorarioForm(request.POST or None)
+    formHorario.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    formEvento = EventoForm(request.POST or None)
+    formEvento.fields["tipo"].queryset = TipoEventoAux.objects.all().exclude(pk=1).exclude(pk=2)
+    formEvento.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    context = {"paciente": paciente, "formSesion": formSesion,
+               "formInforme": formInforme, "formHorario": formHorario,
+               "formEvento": formEvento, "sesiones_box": "hidden",
+               "informes_box": "hidden", "horario_box": "visible",
+               "eventos_box": "hidden", "sesiones": sesiones,
+               "horarios": horarios, "informes": informes,
+               "eventos": otroEventos}
+
     if request.method == 'POST':
         form = HorarioForm(request.POST)
         print(request.POST)
@@ -172,23 +254,51 @@ def horario_paciente_add(request, pk):
             instance = form.save(commit=False)
             instance.save()
             form.save_m2m()
-            return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
+            return render(request, 'paciente_detail.html', context)
 
-    return render(request, 'pacientes_index.html', {})
+    return render(request, 'paciente_detail.html', context)
 
 @login_required
 def evento_paciente_add(request, pk):
     '''
     View that add an evento to a patient (pk)
     '''
+    paciente = get_object_or_404(Paciente, pk=pk)
+    sesiones = Sesion.objects.filter(paciente=pk)
+    informes = Informe.objects.filter(paciente=pk)
+    horarios = ReglasHorario.objects.filter(paciente=pk)
+    # excluded Sesion and Reports events in otroEventos query
+    otroEventos = Evento.objects.filter(paciente=pk).exclude(tipo_id=1).exclude(tipo_id=2)
+
+    formSesion = SesionForm(request.POST or None, request.FILES or None)
+    formSesion.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    formInforme = InformeForm(request.POST or None, request.FILES or None)
+    formInforme.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    formHorario = HorarioForm(request.POST or None)
+    formHorario.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    formEvento = EventoForm(request.POST or None)
+    formEvento.fields["tipo"].queryset = TipoEventoAux.objects.all().exclude(pk=1).exclude(pk=2)
+    formEvento.fields["paciente"].queryset = Paciente.objects.filter(pk=pk)
+
+    context = {"paciente": paciente, "formSesion": formSesion,
+               "formInforme": formInforme, "formHorario": formHorario,
+               "formEvento": formEvento, "sesiones_box": "hidden",
+               "informes_box": "hidden", "horario_box": "hidden",
+               "eventos_box": "visible", "sesiones": sesiones,
+               "horarios": horarios, "informes": informes,
+               "eventos": otroEventos}
+
     if request.method == 'POST':
         form = EventoForm(request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.save()
-            return HttpResponseRedirect(reverse('pacientes:pacientes_index'))
+            return render(request, 'paciente_detail.html', context)
 
-    return render(request, 'pacientes_index.html', {})
+    return render(request, 'paciente_detail.html', context)
 
 
 @login_required
