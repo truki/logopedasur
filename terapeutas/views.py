@@ -99,14 +99,32 @@ def terapeuta_edit(request, pk):
     }
     return render(request, 'terapeutas_edit.html', context)
 
+
 @login_required
 def sesiones_terapeuta(request, pk):
     pass
+
 
 @login_required
 def pacientes_terapeuta(request, pk):
     pass
 
+
 @login_required
 def informes_terapeuta(request, pk):
+    pass
+
+
+@login_required
+def sesion_terapeuta_add(request, pk):
+    pass
+
+
+@login_required
+def evento_terapeuta_add(request, pk):
+    pass
+
+
+@login_required
+def horario_terapeuta_add(request, pk):
     pass
