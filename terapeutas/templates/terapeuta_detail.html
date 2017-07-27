@@ -203,40 +203,103 @@
                         <div class="ibox-title">
                             <h5>Sesiones</h5>
                             <div class="ibox-tools">
-                              <a class="btn btn-white btn-bitbucket">
+                              <a class="btn btn-white btn-bitbucket" data-toggle="modal" data-target="#nuevaSesionModal">
                                 <i class="fa fa-plus"></i>
                               </a>
                             </div>
+                        </div>
+                        <div class="modal inmodal" id="nuevaSesionModal" tabindex="-1" role="dialog" aria-hidden="true" style="display:none;">
+                          <div class="modal-dialog modal-lg">
+                            <div class="modal-content animated bounceInRight">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <i class="fa fa-video-camera modal-icon"></i>
+                                <h4 class="modal-title">Nueva sesión</h4>
+                              </div>
+                              <form method="POST" action="{% url 'terapeutas:sesion_terapeuta_add' terapeuta.pk %}" enctype='multipart/form-data'>
+                                {% csrf_token %}
+                                <div class="modal-body">
+                                  <div class="form-group">
+                                    <label class="col-lg-2 control-label">Paciente:</label>
+                                    <div class="input-group col-lg-10">
+                                      {{ formSesion.paciente }}
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="col-lg-2 control-label">Terapeutas:</label>
+                                    <div class="input-group col-lg-10">
+                                      {{ formSesion.terapeutas }}
+                                    </div>
+                                  </div>
+                                  <div id="fechaSesion" class="form-group">
+                                    <label class="col-lg-2 control-label">Fecha:</label>
+                                    <div class="input-group date col-lg-10">
+                                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{{ formSesion.fecha }}
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="col-lg-2 control-label">Hora inicio:</label>
+                                    <div class="input-group clockpicker col-lg-10" data-placement="top" data-autoclose="true">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-clock-o"></span>
+                                        </span>
+                                        {{ formSesion.hora_ini }}
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="col-lg-2 control-label">Hora fin:</label>
+                                    <div class="input-group clockpicker col-lg-10" data-placement="top" data-autoclose="true">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-clock-o"></span>
+                                        </span>
+                                        {{ formSesion.hora_fin}}
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="col-lg-2 control-label">Info:</label>
+                                    <div class="input-group col-lg-10">
+                                      {{ formSesion.info }}
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="col-lg-2 control-label">Doc:</label>
+                                    <div class="input-group col-lg-10">
+                                      {{ formSesion.doc }}
+                                    </div>
+                                  </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-primary">Insertar sesión</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
                         </div>
                         <div class="ibox-content">
                           <table id="tablaSesiones" class="table">
                             <thead>
                               <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
+                                <th>Fecha</th>
+                                <th>Paciente</th>
+                                <th>Hora Inicio</th>
+                                <th>Hora Fin</th>
+                                <th>Info</th>
+                                <th>Docs</th>
                               </tr>
                             </thead>
                               <tbody>
+                                {% for sesion in sesiones %}
                                 <tr>
-                                  <td>1</td>
-                                  <td>Mark</td>
-                                  <td>Otto</td>
-                                  <td>@mdo</td>
+                                  <td>{{ sesion.fecha }}</td>
+                                  <td>{{ sesion.paciente.nombre}} {{ sesion.paciente.apellidos }}</td>
+                                  <td>{{ sesion.hora_ini }}</td>
+                                  <td>{{ sesion.hora_fin }}</td>
+                                  <td><i class="fa fa-info-circle"></i></td>
+                                  <td><i class="fa fa-file-pdf-o"></i></td>
                                 </tr>
-                                <tr>
-                                  <td>2</td>
-                                  <td>Jacob</td>
-                                  <td>Thornton</td>
-                                  <td>@fat</td>
-                                </tr>
-                                <tr>
-                                  <td>3</td>
-                                  <td>Larry</td>
-                                  <td>the Bird</td>
-                                  <td>@twitter</td>
-                                </tr>
+                                {% endfor %}
                               </tbody>
                             </table>
                         </div>
@@ -341,6 +404,12 @@
     <script src="{% static "js/inspinia.js" %}"></script>
     <script src="{% static "js/plugins/pace/pace.min.js" %}"></script>
 
+    <!-- Data picker -->
+    <script src="{% static "js/plugins/datapicker/bootstrap-datepicker.js" %}"></script>
+
+    <!-- Clock Picker -->
+    <script src="{% static "js/plugins/clockpicker/clockpicker.js" %}"></script>
+
     <!-- jQuery UI -->
     <script src="{% static "js/plugins/jquery-ui/jquery-ui.min.js" %}"></script>
 
@@ -359,6 +428,7 @@
     <!-- Toastr -->
     <script src="{% static "js/plugins/toastr/toastr.min.js" %}"></script>
 
+    <!-- Javascript logic that hide and show therapeutas sections -->
     <script type="text/javascript">
         $(function() {
           $("#sesionesButton").on('click', function(){
@@ -385,6 +455,15 @@
             $("#horario").addClass("hidden");
             $("#pacientes").removeClass('hidden');
           });
+          $('#fechaSesion .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true,
+                orientation: "auto"
+          });
+          $('.clockpicker').clockpicker();
         });
     </script>
 {% endblock %}

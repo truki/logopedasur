@@ -64,7 +64,7 @@ def paciente_detail(request, pk):
     View that show the patient detail, patient is retrieved by primary key
     '''
     paciente = get_object_or_404(Paciente, pk=pk)
-    sesiones = Sesion.objects.filter(paciente=pk)
+    sesiones = Sesion.objects.filter(paciente=pk).order_by('-fecha', 'hora_ini')
     informes = Informe.objects.filter(paciente=pk)
     horarios = ReglasHorario.objects.filter(paciente=pk)
     # excluded Sesion and Reports events in otroEventos query
@@ -127,10 +127,10 @@ def sesion_detail(request, pk):
 @login_required
 def sesion_paciente_add(request, pk):
     '''
-    View that add a tutor into the system
+    View that add a session into the system
     '''
     paciente = get_object_or_404(Paciente, pk=pk)
-    sesiones = Sesion.objects.filter(paciente=pk)
+    sesiones = Sesion.objects.filter(paciente=pk).order_by('-fecha', 'hora_ini')
     informes = Informe.objects.filter(paciente=pk)
     horarios = ReglasHorario.objects.filter(paciente=pk)
     # excluded Sesion and Reports events in otroEventos query
@@ -175,7 +175,7 @@ def informe_paciente_add(request,pk):
     View that add a report to a patient
     '''
     paciente = get_object_or_404(Paciente, pk=pk)
-    sesiones = Sesion.objects.filter(paciente=pk)
+    sesiones = Sesion.objects.filter(paciente=pk).order_by('-fecha', 'hora_ini')
     informes = Informe.objects.filter(paciente=pk)
     horarios = ReglasHorario.objects.filter(paciente=pk)
     # excluded Sesion and Reports events in otroEventos query
@@ -220,7 +220,7 @@ def horario_paciente_add(request, pk):
     View that add a tutor into the system
     '''
     paciente = get_object_or_404(Paciente, pk=pk)
-    sesiones = Sesion.objects.filter(paciente=pk)
+    sesiones = Sesion.objects.filter(paciente=pk).order_by('-fecha', 'hora_ini')
     informes = Informe.objects.filter(paciente=pk)
     horarios = ReglasHorario.objects.filter(paciente=pk)
     # excluded Sesion and Reports events in otroEventos query
@@ -264,7 +264,7 @@ def evento_paciente_add(request, pk):
     View that add an evento to a patient (pk)
     '''
     paciente = get_object_or_404(Paciente, pk=pk)
-    sesiones = Sesion.objects.filter(paciente=pk)
+    sesiones = Sesion.objects.filter(paciente=pk).order_by('-fecha', 'hora_ini')
     informes = Informe.objects.filter(paciente=pk)
     horarios = ReglasHorario.objects.filter(paciente=pk)
     # excluded Sesion and Reports events in otroEventos query

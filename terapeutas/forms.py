@@ -1,6 +1,7 @@
 from django import forms
 
 from .models import Terapeuta
+from pacientes.models import Sesion
 
 class TerapeutaForm(forms.ModelForm):
     '''
@@ -21,4 +22,21 @@ class TerapeutaForm(forms.ModelForm):
             'provincia': forms.TextInput(attrs={'class': 'form-control'}),
             'seg_social': forms.TextInput(attrs={'class': 'form-control'}),
             'titulaciones': forms.SelectMultiple(attrs={'class': 'form-control'}),
+        }
+
+class SesionForm(forms.ModelForm):
+    '''
+    Formulario para insertar un nuevo tutor
+    '''
+    class Meta:
+        model = Sesion
+        fields = '__all__'
+        widgets = {
+            'paciente': forms.Select(attrs={'class': 'form-control'}),
+            'terapeutas': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'fecha': forms.TextInput(attrs={'class': 'form-control'}),
+            'hora_ini': forms.TextInput(attrs={'class': 'form-control'}),
+            'hora_fin': forms.TextInput(attrs={'class': 'form-control'}),
+            'info': forms.Textarea(attrs={'class': 'form-control'}),
+            'doc': forms.FileInput(attrs={'class': 'form-control'}),
         }
