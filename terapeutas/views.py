@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 from .models import Terapeuta
-from .forms import TerapeutaForm
+from .forms import TerapeutaForm, SesionForm
 
 from pacientes.models import Sesion, Informe, Paciente
 
@@ -65,14 +65,20 @@ def terapeuta_detail(request, pk):
     View that show the terapeuta detail, terapeuta is retrieved by primary key
     '''
     terapeuta = get_object_or_404(Terapeuta, pk=pk)
-    sesiones = Sesion.objects.filter(terapeutas__pk=pk)
+    sesiones = Sesion.objects.filter(terapeutas__pk=pk).order_by('-fecha', 'hora_ini')
     informes = Informe.objects.filter(terapeutas__pk=pk)
     pacientes = Paciente.objects.filter(terapeutas__pk=pk)
+
+    formSesion = SesionForm(request.POST or None, request.FILES or None)
+
     context = {"terapeuta": terapeuta,
+               "formSesion": formSesion,
                "pacientes": pacientes, "sesiones":sesiones, "informes": sesiones,
                "sesiones_box": "visible", "informes_box": "hidden",
                "horario_box": "hidden", "eventos_box": "hidden",
                "pacientes_box": "hidden"}
+
+
     return render(request, 'terapeuta_detail.html', context)
 
 @login_required
@@ -117,7 +123,30 @@ def informes_terapeuta(request, pk):
 
 @login_required
 def sesion_terapeuta_add(request, pk):
-    pass
+    '''
+    view that add a session from therapeuta's home
+    '''
+    terapeuta = get_object_or_404(Terapeuta, pk=pk)
+    sesiones = Sesion.objects.filter(terapeutas__pk=pk).order_by('-fecha', 'hora_ini')
+    informes = Informe.objects.filter(terapeutas__pk=pk)
+    pacientes = Paciente.objects.filter(terapeutas__pk=pk)
+
+    formSesion = SesionForm(request.POST or None, request.FILES or None)
+
+    context = {"terapeuta": terapeuta,
+               "formSesion": formSesion,
+               "pacientes": pacientes, "sesiones":sesiones, "informes": sesiones,
+               "sesiones_box": "visible", "informes_box": "hidden",
+               "horario_box": "hidden", "eventos_box": "hidden",
+               "pacientes_box": "hidden"}
+
+    if request.method == 'POST':
+        form = SesionForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+            form.save_m2m()
+            return render(request, 'terapeuta_detail.html', context)
 
 
 @login_required
