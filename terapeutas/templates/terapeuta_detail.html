@@ -12,6 +12,12 @@
     <!-- Toastr style -->
     <link href="{% static "css/plugins/toastr/toastr.min.css" %}" rel="stylesheet">
 
+    <!-- Datapicker style -->
+    <link href="{% static "css/plugins/datapicker/datepicker3.css" %}" rel="stylesheet">
+
+    <!-- Colorpicker styles -->
+    <link href="{% static "css/plugins/clockpicker/clockpicker.css" %}" rel="stylesheet">
+
     <!-- Gritter -->
     <link href="{% static "js/plugins/gritter/jquery.gritter.css" %}" rel="stylesheet">
 
@@ -389,6 +395,9 @@
     <script src="{% static "js/plugins/metisMenu/jquery.metisMenu.js" %}"></script>
     <script src="{% static "js/plugins/slimscroll/jquery.slimscroll.min.js" %}"></script>
 
+    <!-- jQuery UI -->
+    <script src="{% static "js/plugins/jquery-ui/jquery-ui.min.js" %}"></script>
+
     <!-- Flot -->
     <script src="{% static "js/plugins/flot/jquery.flot.js" %}"></script>
     <script src="{% static "js/plugins/flot/jquery.flot.tooltip.min.js" %}"></script>
@@ -403,15 +412,14 @@
     <!-- Custom and plugin javascript -->
     <script src="{% static "js/inspinia.js" %}"></script>
     <script src="{% static "js/plugins/pace/pace.min.js" %}"></script>
+    <script src="{% static "js/plugins/slimscroll/jquery.slimscroll.min.js" %}"></script>
+
 
     <!-- Data picker -->
     <script src="{% static "js/plugins/datapicker/bootstrap-datepicker.js" %}"></script>
 
     <!-- Clock Picker -->
     <script src="{% static "js/plugins/clockpicker/clockpicker.js" %}"></script>
-
-    <!-- jQuery UI -->
-    <script src="{% static "js/plugins/jquery-ui/jquery-ui.min.js" %}"></script>
 
     <!-- GITTER -->
     <script src="{% static "js/plugins/gritter/jquery.gritter.min.js" %}"></script>
@@ -463,7 +471,9 @@
                 autoclose: true,
                 orientation: "auto"
           });
+
           $('.clockpicker').clockpicker();
         });
     </script>
+
 {% endblock %}

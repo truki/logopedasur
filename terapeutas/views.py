@@ -77,9 +77,8 @@ def terapeuta_detail(request, pk):
                "sesiones_box": "visible", "informes_box": "hidden",
                "horario_box": "hidden", "eventos_box": "hidden",
                "pacientes_box": "hidden"}
-
-
     return render(request, 'terapeuta_detail.html', context)
+
 
 @login_required
 def terapeuta_edit(request, pk):
@@ -135,7 +134,7 @@ def sesion_terapeuta_add(request, pk):
 
     context = {"terapeuta": terapeuta,
                "formSesion": formSesion,
-               "pacientes": pacientes, "sesiones":sesiones, "informes": sesiones,
+               "pacientes": pacientes, "sesiones": sesiones, "informes": sesiones,
                "sesiones_box": "visible", "informes_box": "hidden",
                "horario_box": "hidden", "eventos_box": "hidden",
                "pacientes_box": "hidden"}
