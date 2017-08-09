@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 from .models import Terapeuta
-from .forms import TerapeutaForm, SesionForm
+from .forms import TerapeutaForm, SesionForm, PacienteForm
 
 from pacientes.models import Sesion, Informe, Paciente
 
@@ -107,11 +107,6 @@ def terapeuta_edit(request, pk):
 
 @login_required
 def sesiones_terapeuta(request, pk):
-    pass
-
-
-@login_required
-def pacientes_terapeuta(request, pk):
     pass
 
 

@@ -57,6 +57,7 @@ class Paciente(models.Model):
     nombre = models.CharField(max_length=128, blank=False)
     apellidos = models.CharField(max_length=256, blank=True)
     dni = models.CharField(max_length=9, unique=True)
+    fecha_nacimiento = models.DateField(null=True)
     direccion = models.CharField(max_length=256, blank=True)
     imagen = models.ImageField(upload_to='pacientes', null=True, blank=True)
     cod_postal = models.DecimalField(max_digits=5, decimal_places=0,

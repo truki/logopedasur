@@ -415,6 +415,51 @@
               </a>
             </div>
           </div>
+          <div class="modal inmodal" id="nuevoPacienteModal" tabindex="-1" role="dialog" aria-hidden="true" style="display:none;">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                  <i class="fa fa-file-pdf-o modal-icon"></i>
+                  <h4 class="modal-title">Nuevo Paciente</h4>
+                </div>
+                <form method="POST" action="{% url 'pacientes:pacientes_add' %}" enctype='multipart/form-data'>
+                  {% csrf_token %}
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label class="col-lg-2 control-label">Paciente:</label>
+                      <div class="input-group col-lg-10">
+                        {{ formPaciente.nombre }}
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-2 control-label">Título:</label>
+                      <div class="input-group col-lg-10">
+                        {{ formPaciente.apellidos }}
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-2 control-label">Terapeutas:</label>
+                      <div class="input-group col-lg-10">
+                        {{ formPaciente.dni }}
+                      </div>
+                    </div>
+                    <div id="fechaNacimiento" class="form-group">
+                      <label class="col-lg-2 control-label">Fecha nacimiento:</label>
+                      <div class="input-group date col-lg-10">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{{ formInforme.fecha_nacimiento }}
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Insertar paciente</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
           <div class="ibox-content">
 
           </div>

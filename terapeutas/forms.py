@@ -1,7 +1,7 @@
 from django import forms
 
 from .models import Terapeuta
-from pacientes.models import Sesion, Informe
+from pacientes.models import Sesion, Informe, Paciente
 
 class TerapeutaForm(forms.ModelForm):
     '''
@@ -54,4 +54,23 @@ class InformeForm(forms.ModelForm):
             'terapeutas': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'fecha_informe': forms.TextInput(attrs={'class': 'form-control'}),
             'fichero': forms.FileInput(attrs={'class': 'form-control'}),
+        }
+
+class PacienteForm(forms.ModelForm):
+    '''
+    Formulario de tipo ModelForm para insertar un paciente
+    '''
+    class Meta:
+        model = Paciente
+        fields = ('nombre', 'apellidos', 'dni', 'direccion', 'telefono', 'imagen', 'tutor', 'estado')
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'apellidos': forms.TextInput(attrs={'class': 'form-control'}),
+            'dni': forms.TextInput(attrs={'class': 'form-control'}),
+            'direccion': forms.TextInput(attrs={'class': 'form-control'}),
+            'telefono': forms.TextInput(attrs={'class': 'form-control'}),
+            'imagen': forms.FileInput(attrs={'class': 'form-control'}),
+            'tutor': forms.Select(attrs={'class': 'form-control'}),
+            'estado': forms.Select(attrs={'class': 'form-control'}),
+            'fecha_nacimiento': forms.TextInput(attrs={'class': 'form-control'}),
         }
