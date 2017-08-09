@@ -461,7 +461,26 @@
             </div>
           </div>
           <div class="ibox-content">
-
+            <table id="tablaPacientes" class="table">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Terapeutas</th>
+                  <th>Fecha nacimiento</th>
+                </tr>
+              </thead>
+                <tbody>
+                  {% for paciente in pacientes %}
+                  <tr>
+                    <td>{{ paciente.nombre }}</td>
+                    <td>{{ paciente.apellidos }}</td>
+                    <td>{% for terapeuta in paciente.terapeutas.all %} <img alt="Terapeuta" class="img-circle" src="{{ terapeuta.imagen.url }}" width="32" height="32"> {% endfor %}</td>
+                    <td>{{ paciente.fecha_nacimiento }} </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
           </div>
         </div>
       </div>
