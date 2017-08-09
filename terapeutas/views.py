@@ -73,7 +73,7 @@ def terapeuta_detail(request, pk):
 
     context = {"terapeuta": terapeuta,
                "formSesion": formSesion,
-               "pacientes": pacientes, "sesiones":sesiones, "informes": sesiones,
+               "pacientes": pacientes, "sesiones":sesiones, "informes": informes,
                "sesiones_box": "visible", "informes_box": "hidden",
                "horario_box": "hidden", "eventos_box": "hidden",
                "pacientes_box": "hidden"}
@@ -134,13 +134,40 @@ def sesion_terapeuta_add(request, pk):
 
     context = {"terapeuta": terapeuta,
                "formSesion": formSesion,
-               "pacientes": pacientes, "sesiones": sesiones, "informes": sesiones,
+               "pacientes": pacientes, "sesiones": sesiones, "informes": informes,
                "sesiones_box": "visible", "informes_box": "hidden",
                "horario_box": "hidden", "eventos_box": "hidden",
                "pacientes_box": "hidden"}
 
     if request.method == 'POST':
         form = SesionForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+            form.save_m2m()
+            return render(request, 'terapeuta_detail.html', context)
+
+@login_required
+def informe_terapeuta_add(request, pk):
+    '''
+    view that add a report from therapeuta's home
+    '''
+    terapeuta = get_object_or_404(Terapeuta, pk=pk)
+    sesiones = Sesion.objects.filter(terapeutas__pk=pk).order_by('-fecha', 'hora_ini')
+    informes = Informe.objects.filter(terapeutas__pk=pk)
+    pacientes = Paciente.objects.filter(terapeutas__pk=pk)
+
+    formSesion = SesionForm(request.POST or None, request.FILES or None)
+
+    context = {"terapeuta": terapeuta,
+               "formSesion": formSesion,
+               "pacientes": pacientes, "sesiones": sesiones, "informes": informes,
+               "sesiones_box": "visible", "informes_box": "hidden",
+               "horario_box": "hidden", "eventos_box": "hidden",
+               "pacientes_box": "hidden"}
+
+    if request.method == 'POST':
+        form = InformeForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.save()

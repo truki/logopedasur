@@ -13,6 +13,8 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)/sesion/add', views.sesion_terapeuta_add, name='sesion_terapeuta_add'),
     url(r'^(?P<pk>\d+)/evento/add', views.evento_terapeuta_add, name='evento_terapeuta_add'),
     url(r'^(?P<pk>\d+)/horario/add', views.horario_terapeuta_add, name='horario_terapeuta_add'),
+    url(r'^(?P<pk>\d+)/informe/add', views.informe_terapeuta_add, name='informe_terapeuta_add'),
+
 
 
 ]
