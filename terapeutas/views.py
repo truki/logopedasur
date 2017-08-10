@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 from .models import Terapeuta
-from .forms import TerapeutaForm, SesionForm, PacienteForm
+from .forms import TerapeutaForm, SesionForm, PacienteForm, InformeForm
 
 from pacientes.models import Sesion, Informe, Paciente
 
@@ -70,9 +70,11 @@ def terapeuta_detail(request, pk):
     pacientes = Paciente.objects.filter(terapeutas__pk=pk)
 
     formSesion = SesionForm(request.POST or None, request.FILES or None)
+    formInforme = InformeForm(request.POST or None, request.FILES or None)
 
     context = {"terapeuta": terapeuta,
                "formSesion": formSesion,
+               "formInforme": formInforme,
                "pacientes": pacientes, "sesiones":sesiones, "informes": informes,
                "sesiones_box": "visible", "informes_box": "hidden",
                "horario_box": "hidden", "eventos_box": "hidden",
